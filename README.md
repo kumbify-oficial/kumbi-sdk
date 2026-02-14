@@ -108,11 +108,10 @@ const smsClient = new KSMSClient({
 
 ```ts
 // 📤 Send an SMS Message
-
 await smsClient.sendSMS({
   message: "Your verification code is 123456",
   from: "kumbify-app",
-  to: "+1234567890",
+  to: ["+1234567890"],
 });
 
 console.log("SMS sent successfully!");
@@ -124,8 +123,7 @@ console.log("SMS sent successfully!");
 | --------- | ------ | ------------------------------------ |
 | `message` | string | SMS content                          |
 | `from`    | string | Sender identifier (visible to users) |
-| `to`      | string | Recipient phone number               |
-
+| `to`      | string | List of recipient phone numbers               |
 ---
 
 ### Example Usage All Together
@@ -151,7 +149,7 @@ await mailClient.sendSimpleMail({
 await smsClient.sendSMS({
   message: "Your code is 1234",
   from: "KumbifyApp",
-  to: "+1234567890",
+  to: ["+1234567890"],
 });
 ```
 
@@ -159,14 +157,14 @@ await smsClient.sendSMS({
 
 ### Tips & Best Practices
 
-✔️ Store your API keys in environment variables (never hardcode them).
-✔️ Always handle promise rejections with `try/catch`.
-✔️ Log or inspect response objects to monitor delivery success.
+- Store your API keys in environment variables (never hardcode them).
+- Always handle promise rejections with `try/catch`.
+- Log or inspect response objects to monitor delivery success.
 
 ---
 
 ### Supported Environments
 
-✔ Node.js
-✔ TypeScript
-✔ Any JavaScript project that supports npm packages
+- Node.js
+- TypeScript
+- Any JavaScript project that supports npm packages

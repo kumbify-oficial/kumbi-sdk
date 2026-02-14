@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.0.9
+
+### Patch Changes
+
+- update README, sms to recipients
+
 ## 1.0.8
 
 ### Patch Changes
