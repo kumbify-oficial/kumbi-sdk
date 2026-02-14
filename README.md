@@ -39,9 +39,8 @@ const mailClient = new KMailClient({
 });
 ```
 
-### 📤 Send a Simple Email
-
 ```ts
+// 📤 Send a Simple Email
 const sendMail = await mailClient.sendSimpleMail({
   body_html: "<h1>Hello from Kumbify</h1><p>This is a test email</p>",
   body_text: "Hello from Kumbify — this is a test email.",
@@ -75,9 +74,9 @@ const smsClient = new KSMSClient({
 });
 ```
 
-#### 📤 Send an SMS Message
-
 ```ts
+// 📤 Send an SMS Message
+
 await smsClient.sendSMS({
   message: "Your verification code is 123456",
   from: "kumbify-app",

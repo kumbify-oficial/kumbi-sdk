@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.0.4
+
+### Patch Changes
+
+- update clients exceptions
+
 ## 1.0.3
 
 ### Patch Changes
