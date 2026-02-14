@@ -3,11 +3,11 @@ import {
   IKMailSendMailSimpleMessage,
   IKMailSendMailTemplateMessage,
 } from "../utils/types";
-import { APP_CONFIG } from "@/utils/helpers";
+import { APP_CONFIG } from "../utils/helpers";
 
 import axios from "axios";
 
-export class KMailServer {
+export class KMailClient {
   apiKey;
   constructor({ apiKey }: { apiKey: string }) {
     this.apiKey = apiKey;

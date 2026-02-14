@@ -1,2 +1,2 @@
-export * from "./kmail/KMailServer";
-export * from "./ksms/KSMSServer";
+export * from "./kmail/KMailClient";
+export * from "./ksms/KSMSClient";

@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.0.2
+
+### Patch Changes
+
+- update dist files and uniform types
+
 ## 1.0.1
 
 ### Patch Changes

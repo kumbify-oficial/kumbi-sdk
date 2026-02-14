@@ -1,8 +1,8 @@
-import { APP_CONFIG } from "@/utils/helpers";
-import { IKSMSSendMessage } from "@/utils/types";
+import { APP_CONFIG } from "../utils/helpers";
+import { IKSMSSendMessage } from "../utils/types";
 import axios from "axios";
 
-export class KSMSServer {
+export class KSMSClient {
   apiKey;
 
   constructor({ apiKey }: { apiKey: string }) {
