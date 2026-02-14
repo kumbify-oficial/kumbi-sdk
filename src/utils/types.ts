@@ -19,6 +19,7 @@ export type IKMailSendMailTemplateMessage = {
 
 export type IKMailResponseMail = {
   success: boolean;
+  messageId: string;
 };
 
 export type IKSMSSendMessage = {
@@ -29,4 +30,5 @@ export type IKSMSSendMessage = {
 
 export type IKSMSResponseMessage = {
   success: boolean;
+  messageId: string;
 };

@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.0.11
+
+### Patch Changes
+
+- feat: add services return types
+
 ## 1.0.10
 
 ### Patch Changes

@@ -1,14 +1,14 @@
 {
   "name": "@kumbify/sdk",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Oficial Kumbify SDK to integrate our services in your applications",
-  "homepage": "https://github.com/ricardocastl3/kumbify-sdk#readme",
+  "homepage": "https://github.com/kumbify-oficial/kumbi-sdk#readme",
   "bugs": {
-    "url": "https://github.com/ricardocastl3/kumbify-sdk/issues"
+    "url": "https://github.com/kumbify-oficial/kumbi-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ricardocastl3/kumbify-sdk.git"
+    "url": "git+https://github.com/kumbify-oficial/kumbi-sdk.git"
   },
   "publishConfig": {
     "access": "public"
