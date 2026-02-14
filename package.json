@@ -1,0 +1,36 @@
+{
+  "name": "@kumbify/sdk",
+  "version": "2.0.3",
+  "description": "Oficial Kumbify SDK to integrate our services in your applications",
+  "homepage": "https://github.com/ricardocastl3/kumbify-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/ricardocastl3/kumbify-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardocastl3/kumbify-sdk.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "ISC",
+  "author": "Kumbify",
+  "type": "commonjs",
+  "scripts": {
+    "changeset": "changeset",
+    "version-pack": "changeset version",
+    "publish-pack": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.5"
+  }
+}

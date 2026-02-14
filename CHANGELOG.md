@@ -1,0 +1,25 @@
+# kumbi-sdk
+
+## 2.0.3
+
+### Patch Changes
+
+- update server sms and mail
+
+## 2.0.2
+
+### Patch Changes
+
+- update current servers
+
+## 2.0.1
+
+### Patch Changes
+
+- update mail server
+
+## 2.0.0
+
+### Major Changes
+
+- Initial package
