@@ -4,12 +4,11 @@ import {
   IKMailSendMailTemplateMessage,
 } from "../utils/types";
 import { APP_CONFIG } from "../utils/helpers";
-import { AxiosError } from "axios";
 
 import axios from "axios";
 
 export class KMailClient {
-  apiKey;
+  private apiKey;
   constructor({ apiKey }: { apiKey: string }) {
     this.apiKey = apiKey;
   }
@@ -19,16 +18,25 @@ export class KMailClient {
       const response = await axios.post<IKMailResponseMail>(
         APP_CONFIG.KMAIL_URL + "/send",
         {
-          ...data,
+          from_address: data.from,
+          to_address: data.to,
+          subject: data.subject,
+          body_html: data.body_html,
+          body_text: data.body_text,
         },
         { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
       );
       return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        throw new Error("Message: " + error.response.data);
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        const data = error.response?.data;
+        throw new Error(
+          `Mail failed (status: ${status}): ${JSON.stringify(data)}`,
+        );
       }
-      throw new Error("Failed while send simple mail: " + error);
+
+      throw new Error(`Mail failed: ${String(error)}`);
     }
   }
 
@@ -37,14 +45,25 @@ export class KMailClient {
       const response = await axios.post<IKMailResponseMail>(
         APP_CONFIG.KMAIL_URL + "/send",
         {
-          ...data,
+          from_address: data.from,
+          to_address: data.to,
+          template_name: data.template.name,
+          template_data: data.template.data,
         },
         { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
       );
 
       return response.data;
-    } catch (err) {
-      throw new Error("Failed while send template mail: " + err);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        const data = error.response?.data;
+        throw new Error(
+          `Mail failed (status: ${status}): ${JSON.stringify(data)}`,
+        );
+      }
+
+      throw new Error(`Mail failed: ${String(error)}`);
     }
   }
 }

@@ -1,16 +1,18 @@
 export type IKMailSendMailSimpleMessage = {
-  from_address: string;
-  to_address: string[];
+  from: string;
+  to: string[];
   subject: string;
   body_html: string;
   body_text: string;
 };
 
 export type IKMailSendMailTemplateMessage = {
-  from_address: string;
-  to_address: string[];
-  template_name: string;
-  template_data: Record<string, any>;
+  from: string;
+  to: string[];
+  template: {
+    name: string;
+    data: Record<string, any>;
+  };
 };
 
 export type IKMailResponseMail = {
