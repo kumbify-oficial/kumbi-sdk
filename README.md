@@ -8,7 +8,7 @@ This SDK makes it easy to integrate messaging (email + SMS) into your apps with 
 
 ---
 
-## 📌 Installation
+###  Installation
 
 Install using npm:
 
@@ -22,17 +22,16 @@ or using Yarn:
 yarn add @kumbify/sdk
 ```
 
-## 🚀 Importing
+###  Importing
 
 ```ts
 import { KMailClient, KSMSClient } from "@kumbify/sdk";
 ```
 
----
 
-## ✉️ Email — KMailClient
+### Email — KMailClient
 
-### 📍 Create an Email Client
+#### 📍 Create an Email Client
 
 ```ts
 const mailClient = new KMailClient({
@@ -66,9 +65,9 @@ console.log("Email Response:", sendMail);
 
 ---
 
-## 📱 SMS — KSMSClient
+### SMS — KSMSClient
 
-### 📍 Create an SMS Client
+#### 📍 Create an SMS Client
 
 ```ts
 const smsClient = new KSMSClient({
@@ -76,7 +75,7 @@ const smsClient = new KSMSClient({
 });
 ```
 
-### 📤 Send an SMS Message
+#### 📤 Send an SMS Message
 
 ```ts
 await smsClient.sendSMS({
@@ -98,7 +97,7 @@ console.log("SMS sent successfully!");
 
 ---
 
-## 💡 Example Usage All Together
+###  Example Usage All Together
 
 ```ts
 import { KMailClient, KSMSClient } from "@kumbify/sdk";
@@ -125,7 +124,7 @@ await smsClient.sendSMS({
 
 ---
 
-## 🧠 Tips & Best Practices
+### Tips & Best Practices
 
 ✔️ Store your API keys in environment variables (never hardcode them).
 ✔️ Always handle promise rejections with `try/catch`.
@@ -133,7 +132,7 @@ await smsClient.sendSMS({
 
 ---
 
-## 💼 Supported Environments
+### Supported Environments
 
 ✔ Node.js
 ✔ TypeScript
