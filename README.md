@@ -50,7 +50,7 @@ const sendMail = await mailClient.sendSimpleMail({
   },
 });
 
-console.log("Email Response:", sendMail);
+console.log("Email Response: ", sendMail);
 ```
 
 **Parameters explained:**
@@ -62,6 +62,37 @@ console.log("Email Response:", sendMail);
 | `from` | string   | Sender email address              |
 | `subject`      | string   | Email subject                     |
 | `to`   | string[] | List of recipient email addresses |
+
+---
+
+```ts
+// 📤 Send a Template Email
+const sendMail = await mailClient.sendTemplateMail({
+  from: "app@example.com",
+  to: ["user@example.com"],
+  template: {
+    name: "my-template-name",
+    data: {
+      customer: {
+        name: "Ricardo Castle",
+        email: "doe@gmail.com"
+      }
+    },
+  },
+});
+
+console.log("Email Response: ", sendMail);
+
+```
+
+**Parameters explained:**
+
+| Property        | Type     | Description                                                              |
+| --------------- | -------- | ------------------------------------------------------------------------ |
+| `from`          | string   | Sender email address. Must be a verified domain in your Kumbify account. |
+| `to`            | string[] | List of recipient email addresses.                                       |
+| `template.name` | string   | Name of the template created in your Kumbify dashboard.                  |
+| `template.data` | object   | Dynamic data that will be injected into the template.                    |
 
 ---
 

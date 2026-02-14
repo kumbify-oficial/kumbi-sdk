@@ -1,5 +1,23 @@
 # kumbi-sdk
 
+## 1.0.8
+
+### Patch Changes
+
+- update docs
+
+## 1.0.7
+
+### Patch Changes
+
+- update docs, add mail template send
+
+## 1.0.6
+
+### Patch Changes
+
+- fix-bug: send mail, no args found
+
 ## 1.0.5
 
 ### Patch Changes
