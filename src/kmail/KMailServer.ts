@@ -1,4 +1,8 @@
-import { IKMailResponseMail, IKMailSendMailSimpleMessage, IKMailSendMailTemplateMessage } from "../utils/types";
+import {
+  IKMailResponseMail,
+  IKMailSendMailSimpleMessage,
+  IKMailSendMailTemplateMessage,
+} from "../utils/types";
 import { APP_CONFIG } from "@/utils/helpers";
 
 import axios from "axios";
@@ -36,7 +40,7 @@ export class KMailServer {
 
       return response.data;
     } catch (err) {
-      throw new Error("Failed while send simple mail: " + err);
+      throw new Error("Failed while send template mail: " + err);
     }
   }
 }

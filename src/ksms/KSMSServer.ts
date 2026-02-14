@@ -9,14 +9,14 @@ export class KSMSServer {
     this.apiKey = apiKey;
   }
 
-  async sendSMS({ message, from, to }: IKSMSSendMessage) {
+  async sendSMS({ ...data }: IKSMSSendMessage) {
     try {
       const response = await axios.post(
         APP_CONFIG.KSMS_URL + "/send",
         {
-          body: message,
-          to,
-          from,
+          body: data.message,
+          to: data.to,
+          from: data.from,
         },
         { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
       );

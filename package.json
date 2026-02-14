@@ -1,6 +1,6 @@
 {
   "name": "@kumbify/sdk",
-  "version": "2.0.3",
+  "version": "1.0.1",
   "description": "Oficial Kumbify SDK to integrate our services in your applications",
   "homepage": "https://github.com/ricardocastl3/kumbify-sdk#readme",
   "bugs": {
