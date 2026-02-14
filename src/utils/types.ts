@@ -2,8 +2,10 @@ export type IKMailSendMailSimpleMessage = {
   from: string;
   to: string[];
   subject: string;
-  body_html: string;
-  body_text: string;
+  body: {
+    html: string;
+    text: string;
+  };
 };
 
 export type IKMailSendMailTemplateMessage = {

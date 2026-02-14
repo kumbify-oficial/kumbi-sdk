@@ -21,8 +21,8 @@ export class KMailClient {
           from_address: data.from,
           to_address: data.to,
           subject: data.subject,
-          body_html: data.body_html,
-          body_text: data.body_text,
+          body_html: data.body.html,
+          body_text: data.body.text,
         },
         { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
       );

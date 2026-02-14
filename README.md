@@ -8,7 +8,7 @@ This SDK makes it easy to integrate messaging (email + SMS) into your apps with 
 
 ---
 
-###  Installation
+### Installation
 
 Install using npm:
 
@@ -22,12 +22,11 @@ or using Yarn:
 yarn add @kumbify/sdk
 ```
 
-###  Importing
+### Importing
 
 ```ts
 import { KMailClient, KSMSClient } from "@kumbify/sdk";
 ```
-
 
 ### Email — KMailClient
 
@@ -42,11 +41,13 @@ const mailClient = new KMailClient({
 ```ts
 // 📤 Send a Simple Email
 const sendMail = await mailClient.sendSimpleMail({
-  body_html: "<h1>Hello from Kumbify</h1><p>This is a test email</p>",
-  body_text: "Hello from Kumbify — this is a test email.",
-  from_address: "no-reply@kumbify.app",
+  from: "no-reply@kumbify.com",
   subject: "Welcome Email",
-  to_address: ["recipient@example.com"],
+  to: ["user1@example.com"],
+  body: {
+    html: "<h1>Hello from Kumbify</h1><p>This is a test email</p>",
+    text: "Hello from Kumbify — this is a test email.",
+  },
 });
 
 console.log("Email Response:", sendMail);
@@ -56,11 +57,11 @@ console.log("Email Response:", sendMail);
 
 | Property       | Type     | Description                       |
 | -------------- | -------- | --------------------------------- |
-| `body_html`    | string   | HTML email content                |
-| `body_text`    | string   | Plain text email content          |
-| `from_address` | string   | Sender email address              |
+| `body.html`    | string   | HTML email content                |
+| `body.text`    | string   | Plain text email content          |
+| `from` | string   | Sender email address              |
 | `subject`      | string   | Email subject                     |
-| `to_address`   | string[] | List of recipient email addresses |
+| `to`   | string[] | List of recipient email addresses |
 
 ---
 
@@ -96,7 +97,7 @@ console.log("SMS sent successfully!");
 
 ---
 
-###  Example Usage All Together
+### Example Usage All Together
 
 ```ts
 import { KMailClient, KSMSClient } from "@kumbify/sdk";
@@ -106,11 +107,13 @@ const smsClient = new KSMSClient({ apiKey: "SMS_KEY" });
 
 // Send Email
 await mailClient.sendSimpleMail({
-  body_html: "<p>Hello!</p>",
-  body_text: "Hello!",
-  from_address: "no-reply@kumbify.com",
+  from: "no-reply@kumbify.com",
   subject: "Test Email",
-  to_address: ["user1@example.com"],
+  to: ["user1@example.com"],
+  body: {
+    html: "<p>Hello!</p>",
+    text: "Hello!",
+  },
 });
 
 // Send SMS
