@@ -123,7 +123,7 @@ console.log("SMS sent successfully!");
 | --------- | ------ | ------------------------------------ |
 | `message` | string | SMS content                          |
 | `from`    | string | Sender identifier (visible to users) |
-| `to`      | string | List of recipient phone numbers               |
+| `to`      | string[] | List of recipient phone numbers    |
 ---
 
 ### Example Usage All Together
