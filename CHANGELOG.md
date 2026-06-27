@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.1.0
+
+### Minor Changes
+
+- Add oatuh2client and api context
+
 ## 1.0.11
 
 ### Patch Changes

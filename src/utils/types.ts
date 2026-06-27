@@ -1,3 +1,16 @@
+/**
+ * Global Types
+ */
+
+export interface IAPIConfig {
+  lang: "pt" | "en";
+  version: "v1";
+}
+
+/**
+ * KMAIL Types
+ */
+
 export type IKMailSendMailSimpleMessage = {
   from: string;
   to: string[];
@@ -22,6 +35,10 @@ export type IKMailResponseMail = {
   messageId: string;
 };
 
+/**
+ * KSMS Types
+ */
+
 export type IKSMSSendMessage = {
   message: string;
   to: string[];
@@ -31,4 +48,22 @@ export type IKSMSSendMessage = {
 export type IKSMSResponseMessage = {
   success: boolean;
   messageId: string;
+};
+
+/**
+ * OAuth Types
+ */
+
+export type IOAuthUserTokenReponse = {
+  success: boolean;
+  access_token: string;
+  refresh_token: string;
+};
+
+export type IOAuthUserInfoResponse = {
+  first_name: string;
+  last_name: string;
+  photo: string;
+  email: string;
+  kumbi_code: string;
 };

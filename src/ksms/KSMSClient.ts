@@ -1,37 +1,41 @@
 import { APP_CONFIG } from "../utils/helpers";
-import { IKSMSSendMessage } from "../utils/types";
-import axios from "axios";
+import {
+  IAPIConfig,
+  IKSMSResponseMessage,
+  IKSMSSendMessage,
+} from "../utils/types";
+import { fetchRequest } from "../api/api";
+
+import APIError from "../errors/APIError";
 
 export class KSMSClient {
   private apiKey;
+  private api: IAPIConfig = { lang: "pt", version: "v1" };
 
-  constructor({ apiKey }: { apiKey: string }) {
+  constructor({ apiKey, api }: { apiKey: string; api?: IAPIConfig }) {
     this.apiKey = apiKey;
+    this.api = api;
   }
 
   async sendSMS({ ...data }: IKSMSSendMessage) {
     try {
-      const response = await axios.post(
-        APP_CONFIG.KSMS_URL + "/send",
-        {
+      const response: IKSMSResponseMessage = await fetchRequest({
+        url: APP_CONFIG.KSMS_URL + "/send",
+        method: "post",
+        body: {
           body: data.message,
           to: data.to,
           from: data.from,
         },
-        { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
-      );
+        headers: {
+          "kumbi-api-key": "Bearer " + this.apiKey,
+          "accept-language": this.api.lang,
+        },
+      });
 
-      return response.data;
+      return response;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
-        const data = error.response?.data;
-        throw new Error(
-          `SMS failed (status: ${status}): ${JSON.stringify(data)}`,
-        );
-      }
-
-      throw new Error(`SMS failed: ${String(error)}`);
+      APIError.CatchError({ error, section: "sms" });
     }
   }
 }

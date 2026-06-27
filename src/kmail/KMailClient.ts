@@ -1,69 +1,67 @@
 import {
+  IAPIConfig,
   IKMailResponseMail,
   IKMailSendMailSimpleMessage,
   IKMailSendMailTemplateMessage,
 } from "../utils/types";
 import { APP_CONFIG } from "../utils/helpers";
+import { fetchRequest } from "../api/api";
 
-import axios from "axios";
+import APIError from "../errors/APIError";
 
 export class KMailClient {
   private apiKey;
-  constructor({ apiKey }: { apiKey: string }) {
+  private api: IAPIConfig = { lang: "pt", version: "v1" };
+
+  constructor({ apiKey, api }: { apiKey: string; api?: IAPIConfig }) {
     this.apiKey = apiKey;
+    this.api = api;
   }
 
   async sendSimpleMail({ ...data }: IKMailSendMailSimpleMessage) {
     try {
-      const response = await axios.post<IKMailResponseMail>(
-        APP_CONFIG.KMAIL_URL + "/send",
-        {
+      const response: IKMailResponseMail = await fetchRequest({
+        url: APP_CONFIG.KMAIL_URL + "/send",
+        method: "post",
+        body: {
           from_address: data.from,
           to_address: data.to,
           subject: data.subject,
           body_html: data.body.html,
           body_text: data.body.text,
         },
-        { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
-      );
-      return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
-        const data = error.response?.data;
-        throw new Error(
-          `Mail failed (status: ${status}): ${JSON.stringify(data)}`,
-        );
-      }
+        headers: {
+          "kumbi-api-key": "Bearer " + this.apiKey,
+          "accept-language": this.api.lang,
+        },
+      });
 
-      throw new Error(`Mail failed: ${String(error)}`);
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "mail" });
     }
   }
 
   async sendTemplateMail({ ...data }: IKMailSendMailTemplateMessage) {
     try {
-      const response = await axios.post<IKMailResponseMail>(
-        APP_CONFIG.KMAIL_URL + "/send",
-        {
+      const response: IKMailResponseMail = await fetchRequest({
+        url: APP_CONFIG.KMAIL_URL + "/send",
+        method: "post",
+        body: {
           from_address: data.from,
           to_address: data.to,
           template_name: data.template.name,
           template_data: data.template.data,
         },
-        { headers: { "kumbi-api-key": "Bearer " + this.apiKey } },
-      );
+        headers: {
+          "kumbi-api-key": "Bearer " + this.apiKey,
+          "accept-language": this.api.lang,
+        },
+      });
 
-      return response.data;
+      return response;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
-        const data = error.response?.data;
-        throw new Error(
-          `Mail failed (status: ${status}): ${JSON.stringify(data)}`,
-        );
-      }
-
-      throw new Error(`Mail failed: ${String(error)}`);
+      APIError.CatchError({ error, section: "mail" });
     }
   }
 }
