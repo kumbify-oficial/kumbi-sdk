@@ -1,6 +1,6 @@
 # 📦 Kumbify SDK
 
-> A simple and powerful JavaScript/TypeScript SDK for sending **emails** and **SMS messages** through the Kumbify platform.
+> A simple and powerful JavaScript/TypeScript SDK for sending **Emails**, **SMS** messages and **OAuth2Client** through the Kumbify platform.
 
 [Oficial Documentation](https://kumbify.com/en/api-docs?section=sdk)
 
@@ -194,8 +194,8 @@ const oauthServiceUrl = oauthClient.generateOAuthServiceUrl({});
 
 | Property       | Type   | Description                                                                                                                                                                                                             |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | string | SMS content                                                                                                                                                                                                             |
-| `clientSecret` | string | Sender identifier (visible to users)                                                                                                                                                                                    |
+| `clientId`     | string | Your Kumbify App Client ID                                                                                                                                                                                                            |
+| `clientSecret` | string | Your Kumbify App Client secret                                                                                                                                                                                     |
 | `redirectUri`  | object | URL redirect type, choose the one that meets your needs. **Service** if using the client to obtain service permissions. **Account** if using it for sign-in                                                             |
 | `scopes`       | object | Scope type: choose the one that meets your needs. **Service**: if using the client to obtain service permissions, such as sending emails. **Account**: if using it for user account permissions, such as profile access |
 | `api`          | object | API Definitions                                                                                                                                                                                                         |

@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.1.4
+
+### Patch Changes
+
+- resolve readme documentation
+
 ## 1.1.3
 
 ### Patch Changes
