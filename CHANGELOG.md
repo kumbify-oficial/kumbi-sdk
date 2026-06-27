@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.2.1
+
+### Patch Changes
+
+- resolve payment client
+
 ## 1.2.0
 
 ### Minor Changes

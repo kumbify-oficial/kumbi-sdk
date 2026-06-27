@@ -34,7 +34,7 @@ export class KPaymentClient {
   async makeStripePayment({ ...data }: IMakeStripePaymentParams) {
     try {
       const response: IMakeStripePaymentResponse = await fetchRequest({
-        url: `${APP_CONFIG.PAYMENT.API_BASE_URL}/pay/${this.config.provider.international.seller}`,
+        url: `${APP_CONFIG.PAYMENT.API_BASE_URL}/${this.config.provider.international.seller}`,
         method: "post",
         body: data,
         headers: {
@@ -52,7 +52,7 @@ export class KPaymentClient {
   async makeCryptoPayment({ ...data }: IMakeCryptoPaymentParams) {
     try {
       const response: IMakeCryptoPaymentResponse = await fetchRequest({
-        url: `${APP_CONFIG.PAYMENT.API_BASE_URL}/pay/${this.config.provider.international.seller}`,
+        url: `${APP_CONFIG.PAYMENT.API_BASE_URL}/${this.config.provider.international.seller}`,
         method: "post",
         body: data,
         headers: {
@@ -84,7 +84,7 @@ export class KPaymentClient {
         });
       }
 
-      const url = `${APP_CONFIG.PAYMENT.API_BASE_URL}/pay/${this.config.provider.angolan}`;
+      const url = `${APP_CONFIG.PAYMENT.API_BASE_URL}/${this.config.provider.angolan}`;
       const response: IMakeAngolanPaymentResponse = await fetchRequest({
         url: url,
         method: "post",

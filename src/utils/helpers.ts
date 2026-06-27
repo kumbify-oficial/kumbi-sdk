@@ -5,6 +5,6 @@ export const APP_CONFIG = {
     API_BASE_URL: "https://8n8.kumbify.com/api/",
   },
   PAYMENT: {
-    API_BASE_URL: "https://oi.kumbify.com/api/pai",
+    API_BASE_URL: "https://oi.kumbify.com/api/pay",
   },
 };
