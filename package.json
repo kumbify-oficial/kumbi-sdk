@@ -31,7 +31,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@kumbify/sdk": "^1.1.0",
     "axios": "^1.13.5"
   }
 }
