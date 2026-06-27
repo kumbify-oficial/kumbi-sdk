@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.1.5
+
+### Patch Changes
+
+- resolve maps
+
 ## 1.1.4
 
 ### Patch Changes

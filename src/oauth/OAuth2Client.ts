@@ -24,7 +24,7 @@ interface IOAuthRedirect {
 
 interface IOAuthScopes {
   account?: OAuthAccountScopes[];
-  services?: OAuthServiceScopes[];
+  service?: OAuthServiceScopes[];
 }
 
 interface IOAuthClientProps {
@@ -74,7 +74,7 @@ export class OAuth2Client {
       this.api.lang
     }/oauth/services?client_id=${
       this.clientId
-    }&scopes=${this.scopes.services.join(",")}${
+    }&scopes=${this.scopes.service.join(",")}${
       state ? `&state=${state}` : ""
     }&redirect=${this.redirectUri.service}`;
 
