@@ -58,6 +58,7 @@ export interface IProduct {
  */
 export type StripeCurrencies = "USD" | "EUR";
 export interface IMakeStripePaymentParams {
+  amount: number;
   transactionId: string;
   customer: {
     email: string;
@@ -81,11 +82,12 @@ export interface IMakeStripePaymentResponse {
 
 type CryptoCurrencies = "USDC" | "ETH" | "BTC" | "USDT";
 export interface IMakeCryptoPaymentParams {
+  amount: number;
   transactionId: string;
   customer: {
-    email: string;
-    name: string;
-    phone: string;
+    email?: string;
+    name?: string;
+    phone?: string;
   };
   products: IProduct[];
   currency: CryptoCurrencies;

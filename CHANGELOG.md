@@ -1,5 +1,12 @@
 # kumbi-sdk
 
+## 1.2.2
+
+### Patch Changes
+
+- resolve stripe payment
+- resolve crypto payment
+
 ## 1.2.1
 
 ### Patch Changes
