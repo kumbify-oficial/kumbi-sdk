@@ -177,7 +177,7 @@ const oauthClient = new OAuth2Client({
   },
   scopes: {
     account: ["profile", "subscription.read"],
-    services: ["gmail.send.email"],
+    service: ["gmail.send.email"],
   },
   api: {
     lang: "pt",
