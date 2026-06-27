@@ -168,7 +168,8 @@ await smsClient.sendSMS({
 #### Create an OAuth2 Client
 
 ```ts
-const oauthClient = new OAuth2Client({
+
+const oauthClient = new KOAuth2Client({
   clientId: process.env.KUMBIFY_CLIENT_ID,
   clientSecret: process.env.KUMBIFY_CLIENT_SECRET,
   redirectUri: {

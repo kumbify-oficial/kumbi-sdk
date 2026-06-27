@@ -1,12 +1,12 @@
-import { APP_CONFIG } from "../utils/helpers";
-import { fetchRequest } from "../api/api";
+import { APP_CONFIG } from "../../utils/helpers";
+import { fetchRequest } from "../../api/api";
 import {
   IAPIConfig,
   IOAuthUserInfoResponse,
   IOAuthUserTokenReponse,
-} from "../utils/types";
+} from "../../utils/types";
 
-import APIError from "../errors/APIError";
+import APIError from "../../errors/APIError";
 
 interface IOAuthClientTokenParams {
   type: "services" | "account";
@@ -38,7 +38,7 @@ interface IOAuthClientProps {
 type OAuthServiceScopes = "gmail.send.email";
 type OAuthAccountScopes = "profile" | "subscription.read";
 
-export class OAuth2Client {
+export class KOAuth2Client {
   private clientId;
   private clientSecret;
   private redirectUri;

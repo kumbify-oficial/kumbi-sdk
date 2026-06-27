@@ -3,19 +3,28 @@ import {
   IKMailResponseMail,
   IKMailSendMailSimpleMessage,
   IKMailSendMailTemplateMessage,
-} from "../utils/types";
-import { APP_CONFIG } from "../utils/helpers";
-import { fetchRequest } from "../api/api";
+} from "../../utils/types";
+import { APP_CONFIG } from "../../utils/helpers";
+import { fetchRequest } from "../../api/api";
 
-import APIError from "../errors/APIError";
+import APIError from "../../errors/APIError";
+
+interface IKMailParams {
+  apiKey: string;
+  api?: IAPIConfig;
+}
 
 export class KMailClient {
-  private apiKey;
-  private api: IAPIConfig = { lang: "pt", version: "v1" };
+  private config: IKMailParams = {
+    apiKey: "",
+    api: {
+      lang: "pt",
+      version: "v1",
+    },
+  };
 
-  constructor({ apiKey, api }: { apiKey: string; api?: IAPIConfig }) {
-    this.apiKey = apiKey;
-    this.api = api;
+  constructor({ ...data }: IKMailParams) {
+    this.config = data;
   }
 
   async sendSimpleMail({ ...data }: IKMailSendMailSimpleMessage) {
@@ -31,8 +40,8 @@ export class KMailClient {
           body_text: data.body.text,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.apiKey,
-          "accept-language": this.api.lang,
+          "kumbi-api-key": "Bearer " + this.config.apiKey,
+          "accept-language": this.config.api.lang,
         },
       });
 
@@ -54,8 +63,8 @@ export class KMailClient {
           template_data: data.template.data,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.apiKey,
-          "accept-language": this.api.lang,
+          "kumbi-api-key": "Bearer " + this.config.apiKey,
+          "accept-language": this.config.api.lang,
         },
       });
 

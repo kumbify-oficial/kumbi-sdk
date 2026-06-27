@@ -1,13 +1,7 @@
 import axios from "axios";
 
 class APIError {
-  CatchError({
-    error,
-    section,
-  }: {
-    error: any;
-    section: "mail" | "sms" | "oauth";
-  }) {
+  SectionMessage(section: string) {
     let errorSection = "";
 
     switch (section) {
@@ -22,7 +16,23 @@ class APIError {
       case "sms":
         errorSection = "SMS Service: Failed =>";
         break;
+
+      case "payment":
+        errorSection = "Payment Service: Failed =>";
+        break;
     }
+
+    return errorSection;
+  }
+
+  CatchError({
+    error,
+    section,
+  }: {
+    error: any;
+    section: "mail" | "sms" | "oauth" | "payment";
+  }) {
+    let errorSection = this.SectionMessage(section);
 
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;
@@ -33,6 +43,17 @@ class APIError {
     }
 
     throw new Error(`${errorSection} ${String(error)}`);
+  }
+
+  ErrorMessage({
+    section,
+    message,
+  }: {
+    section: "mail" | "sms" | "oauth" | "payment";
+    message?: string;
+  }) {
+    let errorSection = this.SectionMessage(section);
+    throw new Error(`${errorSection} ${message}`);
   }
 }
 

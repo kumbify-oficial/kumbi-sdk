@@ -1,20 +1,29 @@
-import { APP_CONFIG } from "../utils/helpers";
+import { APP_CONFIG } from "../../utils/helpers";
 import {
   IAPIConfig,
   IKSMSResponseMessage,
   IKSMSSendMessage,
-} from "../utils/types";
-import { fetchRequest } from "../api/api";
+} from "../../utils/types";
+import { fetchRequest } from "../../api/api";
 
-import APIError from "../errors/APIError";
+import APIError from "../../errors/APIError";
+
+interface IKSMSParams {
+  apiKey: string;
+  api?: IAPIConfig;
+}
 
 export class KSMSClient {
-  private apiKey;
-  private api: IAPIConfig = { lang: "pt", version: "v1" };
+  private config: IKSMSParams = {
+    apiKey: "",
+    api: {
+      lang: "pt",
+      version: "v1",
+    },
+  };
 
-  constructor({ apiKey, api }: { apiKey: string; api?: IAPIConfig }) {
-    this.apiKey = apiKey;
-    this.api = api;
+  constructor({ ...data }: IKSMSParams) {
+    this.config = data;
   }
 
   async sendSMS({ ...data }: IKSMSSendMessage) {
@@ -28,8 +37,8 @@ export class KSMSClient {
           from: data.from,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.apiKey,
-          "accept-language": this.api.lang,
+          "kumbi-api-key": "Bearer " + this.config.apiKey,
+          "accept-language": this.config.api.lang,
         },
       });
 

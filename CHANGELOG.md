@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- Add KPaymentClient
+
 ## 1.1.6
 
 ### Patch Changes
