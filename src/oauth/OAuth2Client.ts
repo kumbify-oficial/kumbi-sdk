@@ -60,7 +60,7 @@ export class OAuth2Client {
   }
 
   generateOAuthAccountUrl({ state }: { state?: string }) {
-    const url = `${APP_CONFIG.OAUTH.ACCOUNT}?client_id=${
+    const url = `https://kumbify.com/${this.api.lang}/oauth?client_id=${
       this.clientId
     }&scopes=${this.scopes.account.join(",")}${
       state ? `&state=${state}` : ""
@@ -70,7 +70,9 @@ export class OAuth2Client {
   }
 
   generateOAuthServiceUrl({ state }: { state?: string }) {
-    const url = `${APP_CONFIG.OAUTH.ACCOUNT}?client_id=${
+    const url = `https://kumbify.com/${
+      this.api.lang
+    }/oauth/services?client_id=${
       this.clientId
     }&scopes=${this.scopes.services.join(",")}${
       state ? `&state=${state}` : ""

@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.1.3
+
+### Patch Changes
+
+- resolve oauth2client generateUrls lang
+
 ## 1.1.2
 
 ### Patch Changes
