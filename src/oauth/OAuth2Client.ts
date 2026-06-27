@@ -36,7 +36,7 @@ interface IOAuthClientProps {
 }
 
 type OAuthServiceScopes = "gmail.send.email";
-type OAuthAccountScopes = "profile,subscription.read";
+type OAuthAccountScopes = "profile" | "subscription.read";
 
 export class OAuth2Client {
   private clientId;
@@ -69,13 +69,7 @@ export class OAuth2Client {
     return { url };
   }
 
-  generateOAuthServiceUrl({
-    state,
-  }: {
-    redirect_url: string;
-    scopes: OAuthServiceScopes;
-    state?: string;
-  }) {
+  generateOAuthServiceUrl({ state }: { state?: string }) {
     const url = `${APP_CONFIG.OAUTH.ACCOUNT}?client_id=${
       this.clientId
     }&scopes=${this.scopes.services.join(",")}${

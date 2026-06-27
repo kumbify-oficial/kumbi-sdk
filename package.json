@@ -1,6 +1,6 @@
 {
   "name": "@kumbify/sdk",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Oficial Kumbify SDK to integrate our services in your applications",
   "homepage": "https://github.com/kumbify-oficial/kumbi-sdk#readme",
   "bugs": {
@@ -24,7 +24,7 @@
   "scripts": {
     "changeset": "changeset",
     "version-pack": "changeset version",
-    "publish-pack": "changeset publish"
+    "publish-pack": "tsc && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

@@ -30,11 +30,15 @@ import { KMailClient, KSMSClient } from "@kumbify/sdk";
 
 ### Email — KMailClient
 
-#### 📍 Create an Email Client
+#### Create an Email Client
 
 ```ts
 const mailClient = new KMailClient({
   apiKey: "YOUR_EMAIL_API_KEY",
+  api: {
+    lang: "en",
+    version: "v1",
+  },
 });
 ```
 
@@ -55,13 +59,13 @@ console.log("Email Response: ", sendMail);
 
 **Parameters explained:**
 
-| Property       | Type     | Description                       |
-| -------------- | -------- | --------------------------------- |
-| `body.html`    | string   | HTML email content                |
-| `body.text`    | string   | Plain text email content          |
-| `from` | string   | Sender email address              |
-| `subject`      | string   | Email subject                     |
-| `to`   | string[] | List of recipient email addresses |
+| Property    | Type     | Description                       |
+| ----------- | -------- | --------------------------------- |
+| `body.html` | string   | HTML email content                |
+| `body.text` | string   | Plain text email content          |
+| `from`      | string   | Sender email address              |
+| `subject`   | string   | Email subject                     |
+| `to`        | string[] | List of recipient email addresses |
 
 ---
 
@@ -75,14 +79,13 @@ const sendMail = await mailClient.sendTemplateMail({
     data: {
       customer: {
         name: "Ricardo Castle",
-        email: "doe@gmail.com"
-      }
+        email: "doe@gmail.com",
+      },
     },
   },
 });
 
 console.log("Email Response: ", sendMail);
-
 ```
 
 **Parameters explained:**
@@ -98,11 +101,15 @@ console.log("Email Response: ", sendMail);
 
 ### SMS — KSMSClient
 
-#### 📍 Create an SMS Client
+#### Create an SMS Client
 
 ```ts
 const smsClient = new KSMSClient({
   apiKey: "YOUR_SMS_API_KEY",
+  api: {
+    lang: "en",
+    version: "v1",
+  },
 });
 ```
 
@@ -119,11 +126,12 @@ console.log("SMS sent successfully!");
 
 **Parameters explained:**
 
-| Property  | Type   | Description                          |
-| --------- | ------ | ------------------------------------ |
-| `message` | string | SMS content                          |
-| `from`    | string | Sender identifier (visible to users) |
-| `to`      | string[] | List of recipient phone numbers    |
+| Property  | Type     | Description                          |
+| --------- | -------- | ------------------------------------ |
+| `message` | string   | SMS content                          |
+| `from`    | string   | Sender identifier (visible to users) |
+| `to`      | string[] | List of recipient phone numbers      |
+
 ---
 
 ### Example Usage All Together
@@ -152,6 +160,45 @@ await smsClient.sendSMS({
   to: ["+1234567890"],
 });
 ```
+
+---
+
+### OAuth2Client
+
+#### Create an OAuth2 Client
+
+```ts
+const oauthClient = new OAuth2Client({
+  clientId: process.env.KUMBIFY_CLIENT_ID,
+  clientSecret: process.env.KUMBIFY_CLIENT_SECRET,
+  redirectUri: {
+    account: "",
+    service: "",
+  },
+  scopes: {
+    account: ["profile", "subscription.read"],
+    services: ["gmail.send.email"],
+  },
+  api: {
+    lang: "pt",
+    version: "v1",
+  },
+});
+
+// Generate OAuth Account URL
+const oauthAccountUrl = oauthClient.generateOAuthAccountUrl({});
+
+// Generate OAuth Service URL
+const oauthServiceUrl = oauthClient.generateOAuthServiceUrl({});
+```
+
+| Property       | Type   | Description                                                                                                                                                                                                             |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`     | string | SMS content                                                                                                                                                                                                             |
+| `clientSecret` | string | Sender identifier (visible to users)                                                                                                                                                                                    |
+| `redirectUri`  | object | URL redirect type, choose the one that meets your needs. **Service** if using the client to obtain service permissions. **Account** if using it for sign-in                                                             |
+| `scopes`       | object | Scope type: choose the one that meets your needs. **Service**: if using the client to obtain service permissions, such as sending emails. **Account**: if using it for user account permissions, such as profile access |
+| `api`          | object | API Definitions                                                                                                                                                                                                         |
 
 ---
 

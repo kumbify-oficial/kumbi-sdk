@@ -1,5 +1,17 @@
 # kumbi-sdk
 
+## 1.1.2
+
+### Patch Changes
+
+- Resolve oauthclient scopes
+
+## 1.1.1
+
+### Patch Changes
+
+- Resolve maps
+
 ## 1.1.0
 
 ### Minor Changes
