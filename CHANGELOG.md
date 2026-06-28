@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.2.5
+
+### Patch Changes
+
+- rebuild package
+
 ## 1.2.4
 
 ### Patch Changes
