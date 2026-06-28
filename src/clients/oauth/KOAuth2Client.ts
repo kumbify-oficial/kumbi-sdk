@@ -102,7 +102,7 @@ export class KOAuth2Client {
         },
         headers: {
           "kumbi-app-key": `Bearer ${this.clientSecret}`,
-          "accept-language": this.api.lang,
+          lang: this.api.lang,
         },
       });
 
@@ -122,7 +122,7 @@ export class KOAuth2Client {
         },
         headers: {
           "kumbi-app-key": `Bearer ${this.clientSecret}`,
-          "accept-language": this.api.lang,
+          lang: this.api.lang,
         },
       });
 

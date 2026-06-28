@@ -38,7 +38,7 @@ export class KSMSClient {
         },
         headers: {
           "kumbi-api-key": "Bearer " + this.config.apiKey,
-          "accept-language": this.config.api.lang,
+          lang: this.config.api.lang,
         },
       });
 

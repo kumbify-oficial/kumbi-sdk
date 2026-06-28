@@ -1,5 +1,17 @@
 # kumbi-sdk
 
+## 1.2.4
+
+### Patch Changes
+
+- refactor payment client
+
+## 1.2.3
+
+### Patch Changes
+
+- update payment clients
+
 ## 1.2.2
 
 ### Patch Changes

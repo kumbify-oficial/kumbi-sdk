@@ -1,6 +1,6 @@
 {
   "name": "@kumbify/sdk",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Oficial Kumbify SDK to integrate our services in your applications",
   "homepage": "https://github.com/kumbify-oficial/kumbi-sdk#readme",
   "bugs": {
@@ -25,10 +25,14 @@
   "scripts": {
     "changeset": "changeset",
     "version-pack": "changeset version",
-    "publish-pack": "tsc && changeset publish"
+    "publish-pack": "tsc && changeset publish",
+    "test-mail": "ts-node-dev ./src/clients/kmail/KMailClient.ts",
+    "test-sms": "ts-node-dev ./src/clients/ksms/KSMSClient.ts",
+    "test-payment": "ts-node-dev ./src/clients/payment/KPaymentClient.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {

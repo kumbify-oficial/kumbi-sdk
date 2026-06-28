@@ -1,26 +1,17 @@
 import { IAPIConfig } from "../../utils/types";
 
 type EAngolanPaymentProviders = "paypay";
-type EInternationalPaymentProviders = "stripe" | "crypto";
 
 export interface IPaymentParams {
   api?: IAPIConfig;
   apiKey: string;
-  provider: {
-    angolan?: {
-      seller: EAngolanPaymentProviders;
-    };
-    international?: {
-      seller: EInternationalPaymentProviders;
-    };
-    type: "angolan" | "international";
-  };
 }
 
 export interface IMakeAngolanPaymentParams {
   amount: number;
   subject: string;
   method: "reference" | "multicaixa";
+  provider: EAngolanPaymentProviders;
   transfer?: {
     iban: string;
     owner_name: string;
@@ -58,21 +49,21 @@ export interface IProduct {
  */
 export type StripeCurrencies = "USD" | "EUR";
 export interface IMakeStripePaymentParams {
-  amount: number;
   transactionId: string;
   customer: {
     email: string;
     name: string;
   };
-  product: IProduct[];
+  products: IProduct[];
   redirect: {
     success_url?: string;
     cancel_url?: string;
   };
-  currency: StripeCurrencies;
+  stripeCurrency: StripeCurrencies;
 }
 
 export interface IMakeStripePaymentResponse {
+  success: boolean;
   url: string;
 }
 
@@ -82,7 +73,6 @@ export interface IMakeStripePaymentResponse {
 
 type CryptoCurrencies = "USDC" | "ETH" | "BTC" | "USDT";
 export interface IMakeCryptoPaymentParams {
-  amount: number;
   transactionId: string;
   customer: {
     email?: string;
@@ -90,9 +80,11 @@ export interface IMakeCryptoPaymentParams {
     phone?: string;
   };
   products: IProduct[];
-  currency: CryptoCurrencies;
+  cryptoCurrency: CryptoCurrencies;
 }
 
 export interface IMakeCryptoPaymentResponse {
+  success: boolean;
   address: string;
+  checkoutLink: string;
 }
