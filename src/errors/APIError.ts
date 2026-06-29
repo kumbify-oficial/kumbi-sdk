@@ -55,6 +55,10 @@ class APIError {
     let errorSection = this.SectionMessage(section);
     throw new Error(`${errorSection} ${message}`);
   }
+
+  LangMessage({ en, pt, lang }: { pt: string; en: string; lang: string }) {
+    return lang == "pt" ? pt : en;
+  }
 }
 
 export default new APIError();

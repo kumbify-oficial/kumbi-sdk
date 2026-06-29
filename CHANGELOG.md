@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.3.0
+
+### Minor Changes
+
+- update payment client and transpilation
+
 ## 1.2.5
 
 ### Patch Changes
