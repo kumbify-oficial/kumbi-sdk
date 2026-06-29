@@ -89,7 +89,7 @@ export class KPaymentClient {
   }: {
     /** Request */
     req: {
-      body: any;
+      body: Record<string, any>;
       headers: Record<string, any>;
     };
 
