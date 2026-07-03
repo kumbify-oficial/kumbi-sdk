@@ -61,10 +61,13 @@ export type IOAuthUserTokenReponse = {
 };
 
 export type IOAuthUserInfoResponse = {
-  first_name: string;
-  last_name: string;
-  photo: string;
-  email?: string;
-  phone?: string;
-  kumbi_code: string;
+  success: boolean;
+  user: {
+    first_name: string;
+    last_name: string;
+    photo: string;
+    email?: string;
+    phone?: string;
+    kumbi_code: string;
+  };
 };
