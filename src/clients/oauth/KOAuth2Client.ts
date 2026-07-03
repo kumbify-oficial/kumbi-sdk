@@ -126,7 +126,8 @@ export class KOAuth2Client {
         },
       });
 
-      return response;
+      const user = response;
+      return { user };
     } catch (error) {
       APIError.CatchError({ error, section: "oauth" });
     }
