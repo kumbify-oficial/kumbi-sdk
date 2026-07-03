@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.3.2
+
+### Patch Changes
+
+- add phone param to oauth client
+
 ## 1.3.1
 
 ### Patch Changes

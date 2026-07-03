@@ -64,6 +64,7 @@ export type IOAuthUserInfoResponse = {
   first_name: string;
   last_name: string;
   photo: string;
-  email: string;
+  email?: string;
+  phone?: string;
   kumbi_code: string;
 };
