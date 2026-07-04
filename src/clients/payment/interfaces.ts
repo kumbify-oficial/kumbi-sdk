@@ -10,7 +10,7 @@ export interface IPaymentParams {
 export interface IMakeAngolanPaymentParams {
   amount: number;
   subject: string;
-  method: "reference" | "multicaixa";
+  method: "reference" | "multicaixa" | "paypay";
   provider: EAngolanPaymentProviders;
   transfer?: {
     iban: string;
@@ -32,6 +32,7 @@ export interface IMakeAngolanPaymentResponse {
   trade: {
     entity?: string;
     reference?: number;
+    link?: string;
     timestamp: string;
     status: "pending" | "success" | "failed";
   };
