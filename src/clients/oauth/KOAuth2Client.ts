@@ -35,36 +35,50 @@ interface IOAuthClientProps {
   api?: IAPIConfig;
 }
 
-type OAuthServiceScopes = "gmail.send.email";
-type OAuthAccountScopes = "profile" | "subscription.read";
+type OAuthServiceScopes = "gmail.send.email" | "";
+type OAuthAccountScopes = "profile" | "subscription.read" | "";
 
 export class KOAuth2Client {
-  private clientId;
-  private clientSecret;
-  private redirectUri;
-  private scopes;
   private api: IAPIConfig = { lang: "pt", version: "v1" };
+  private config: IOAuthClientProps = {
+    clientId: "",
+    clientSecret: "",
+    redirectUri: { account: "", service: "" },
+    scopes: {
+      account: [""],
+      service: [""],
+    },
+    api: {
+      lang: "pt",
+      version: "v1",
+    },
+  };
 
-  constructor({
-    clientId,
-    clientSecret,
-    redirectUri,
-    scopes,
-    api,
-  }: IOAuthClientProps) {
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
-    this.redirectUri = redirectUri;
-    this.scopes = scopes;
-    this.api = api;
+  constructor({ api, redirectUri, scopes, ...rest }: IOAuthClientProps) {
+    this.config = {
+      ...this.config,
+      ...rest,
+      scopes: {
+        ...this.config.scopes,
+        ...scopes,
+      },
+      redirectUri: {
+        ...this.config.redirectUri,
+        ...redirectUri,
+      },
+      api: {
+        ...this.config.api,
+        ...api,
+      },
+    };
   }
 
   generateOAuthAccountUrl({ state }: { state?: string }) {
     const url = `https://kumbify.com/${this.api.lang}/oauth?client_id=${
-      this.clientId
-    }&scopes=${this.scopes.account.join(",")}${
+      this.config.clientId
+    }&scopes=${this.config.scopes.account.join(",")}${
       state ? `&state=${state}` : ""
-    }&redirect=${this.redirectUri.account}`;
+    }&redirect=${this.config.redirectUri.account}`;
 
     return { url };
   }
@@ -73,10 +87,10 @@ export class KOAuth2Client {
     const url = `https://kumbify.com/${
       this.api.lang
     }/oauth/services?client_id=${
-      this.clientId
-    }&scopes=${this.scopes.service.join(",")}${
+      this.config.clientId
+    }&scopes=${this.config.scopes.service.join(",")}${
       state ? `&state=${state}` : ""
-    }&redirect=${this.redirectUri.service}`;
+    }&redirect=${this.config.redirectUri.service}`;
 
     return { url };
   }
@@ -96,12 +110,12 @@ export class KOAuth2Client {
           code: data.code,
           grant_type: data.grant_type,
           refresh_token: data.refresh_token,
-          client_id: this.clientId,
+          client_id: this.config.clientId,
           redirect_uri: redirectUri,
           expires_in: data.expires_in,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.clientSecret}`,
+          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
           lang: this.api.lang,
         },
       });
@@ -121,7 +135,7 @@ export class KOAuth2Client {
           token: accessToken,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.clientSecret}`,
+          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
           lang: this.api.lang,
         },
       });

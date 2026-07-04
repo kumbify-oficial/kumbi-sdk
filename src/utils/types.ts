@@ -3,8 +3,8 @@
  */
 
 export interface IAPIConfig {
-  lang: "pt" | "en";
-  version: "v1";
+  lang?: "pt" | "en";
+  version?: "v1";
 }
 
 /**

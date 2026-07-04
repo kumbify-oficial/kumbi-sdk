@@ -23,8 +23,15 @@ export class KMailClient {
     },
   };
 
-  constructor({ ...data }: IKMailParams) {
-    this.config = data;
+  constructor({ api, ...rest }: IKMailParams) {
+    this.config = {
+      ...this.config,
+      ...rest,
+      api: {
+        ...this.config.api,
+        ...api,
+      },
+    };
   }
 
   async sendSimpleMail({ ...data }: IKMailSendMailSimpleMessage) {

@@ -21,8 +21,15 @@ export class KPaymentClient {
     },
   };
 
-  constructor({ ...data }: IPaymentParams) {
-    this.config = data;
+  constructor({ api, ...rest }: IPaymentParams) {
+    this.config = {
+      ...this.config,
+      ...rest,
+      api: {
+        ...this.config.api,
+        ...api,
+      },
+    };
   }
 
   async makeStripePayment({ ...data }: IMakeStripePaymentParams) {
@@ -107,7 +114,7 @@ export class KPaymentClient {
       const signature = req.headers["kumbi-sign-payload"];
       const webhookSecret = req.headers["kumbi-sign-webhook"];
 
-      if (signature || webhookSecret) {
+      if (!signature || !webhookSecret) {
         errorMessage.en = "Invalid Request";
         errorMessage.pt = "Requisição inválida";
         APIError.ErrorMessage({

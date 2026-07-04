@@ -1,6 +1,6 @@
 {
   "name": "@kumbify/sdk",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Oficial Kumbify SDK to integrate our services in your applications",
   "homepage": "https://github.com/kumbify-oficial/kumbi-sdk#readme",
   "bugs": {
@@ -21,7 +21,8 @@
     "kumbify",
     "sms",
     "email",
-    "oauth"
+    "oauth",
+    "automation"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

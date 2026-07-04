@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.3.5
+
+### Patch Changes
+
+- update client constructor types
+
 ## 1.3.4
 
 ### Patch Changes

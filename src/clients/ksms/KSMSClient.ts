@@ -22,8 +22,15 @@ export class KSMSClient {
     },
   };
 
-  constructor({ ...data }: IKSMSParams) {
-    this.config = data;
+  constructor({ api, ...rest }: IKSMSParams) {
+    this.config = {
+      ...this.config,
+      ...rest,
+      api: {
+        ...this.config.api,
+        ...api,
+      },
+    };
   }
 
   async sendSMS({ ...data }: IKSMSSendMessage) {
