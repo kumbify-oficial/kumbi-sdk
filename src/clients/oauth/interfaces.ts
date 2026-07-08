@@ -45,5 +45,14 @@ export type OAuthServicePlatform =
   | "asana"
   | "";
 
-export type OAuthServiceScopes = "gmail.send.email" | "";
+export type OAuthServiceScopes =
+  | "gmail.send.email"
+  | "instagram.publish"
+  | "instagram.comment"
+  | "instagram.message"
+  | "facebook-pages.publish"
+  | "facebook-pages.comment"
+  | "facebook-pages.message"
+  | "whatsapp.message";
+
 export type OAuthAccountScopes = "profile" | "subscription.read" | "";
