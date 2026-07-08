@@ -1,5 +1,23 @@
 # kumbi-sdk
 
+## 1.5.3
+
+### Patch Changes
+
+- remove kwaba dev test
+
+## 1.5.2
+
+### Patch Changes
+
+- update package.json type module
+
+## 1.5.1
+
+### Patch Changes
+
+- update oauth scopes
+
 ## 1.5.0
 
 ### Minor Changes

@@ -160,15 +160,3 @@ export class KWabaClient {
     }
   }
 }
-
-const waClient = new KWabaClient({ apiKey: "" });
-
-waClient.sendMessageOficial({
-  to: "",
-  official: {
-    type: "text",
-  },
-  text: {
-    content: "oii",
-  },
-});
