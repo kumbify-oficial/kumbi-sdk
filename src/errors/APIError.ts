@@ -1,7 +1,16 @@
 import axios from "axios";
 
+type sectionType =
+  | "mail"
+  | "sms"
+  | "oauth"
+  | "payment"
+  | "kwaba"
+  | "kfb"
+  | "kinsta";
+
 class APIError {
-  SectionMessage(section: string) {
+  SectionMessage(section: sectionType) {
     let errorSection = "";
 
     switch (section) {
@@ -20,18 +29,21 @@ class APIError {
       case "payment":
         errorSection = "Payment Service: Failed =>";
         break;
+      case "kfb":
+        errorSection = "Facebook Service: Failed =>";
+        break;
+      case "kwaba":
+        errorSection = "Waba Service: Failed =>";
+        break;
+      case "kinsta":
+        errorSection = "Instagram Service: Failed =>";
+        break;
     }
 
     return errorSection;
   }
 
-  CatchError({
-    error,
-    section,
-  }: {
-    error: any;
-    section: "mail" | "sms" | "oauth" | "payment";
-  }) {
+  CatchError({ error, section }: { error: any; section: sectionType }) {
     let errorSection = this.SectionMessage(section);
 
     if (axios.isAxiosError(error)) {
@@ -49,7 +61,7 @@ class APIError {
     section,
     message,
   }: {
-    section: "mail" | "sms" | "oauth" | "payment";
+    section: sectionType;
     message?: string;
   }) {
     let errorSection = this.SectionMessage(section);

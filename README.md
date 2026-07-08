@@ -168,7 +168,6 @@ await smsClient.sendSMS({
 #### Create an OAuth2 Client
 
 ```ts
-
 const oauthClient = new KOAuth2Client({
   clientId: process.env.KUMBIFY_CLIENT_ID,
   clientSecret: process.env.KUMBIFY_CLIENT_SECRET,
@@ -178,7 +177,10 @@ const oauthClient = new KOAuth2Client({
   },
   scopes: {
     account: ["profile", "subscription.read"],
-    service: ["gmail.send.email"],
+    service: {
+      scopes: ["gmail.send.email"],
+      platform: "gmail",
+    },
   },
   api: {
     lang: "pt",
@@ -195,8 +197,8 @@ const oauthServiceUrl = oauthClient.generateOAuthServiceUrl({});
 
 | Property       | Type   | Description                                                                                                                                                                                                             |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | string | Your Kumbify App Client ID                                                                                                                                                                                                            |
-| `clientSecret` | string | Your Kumbify App Client secret                                                                                                                                                                                     |
+| `clientId`     | string | Your Kumbify App Client ID                                                                                                                                                                                              |
+| `clientSecret` | string | Your Kumbify App Client secret                                                                                                                                                                                          |
 | `redirectUri`  | object | URL redirect type, choose the one that meets your needs. **Service** if using the client to obtain service permissions. **Account** if using it for sign-in                                                             |
 | `scopes`       | object | Scope type: choose the one that meets your needs. **Service**: if using the client to obtain service permissions, such as sending emails. **Account**: if using it for user account permissions, such as profile access |
 | `api`          | object | API Definitions                                                                                                                                                                                                         |

@@ -1,52 +1,29 @@
 import { APP_CONFIG } from "../../utils/helpers";
 import { fetchRequest } from "../../api/api";
 import {
-  IAPIConfig,
   IOAuthUserInfoResponse,
   IOAuthUserTokenReponse,
 } from "../../utils/types";
+import {
+  IOAuthClientProps,
+  IOAuthClientTokenParams,
+  IOAuthVerifyWebhookEvents,
+} from "./interfaces";
+import crypto from "crypto";
 
 import APIError from "../../errors/APIError";
 
-interface IOAuthClientTokenParams {
-  type: "services" | "account";
-  code: string;
-  grant_type: "authorization_code" | "refresh_token";
-  refresh_token?: string;
-  redirect?: IOAuthRedirect;
-  expires_in: "1h" | "1d" | "7d" | "never";
-}
-
-interface IOAuthRedirect {
-  account?: string;
-  service?: string;
-}
-
-interface IOAuthScopes {
-  account?: OAuthAccountScopes[];
-  service?: OAuthServiceScopes[];
-}
-
-interface IOAuthClientProps {
-  clientId: string;
-  clientSecret: string;
-  scopes: IOAuthScopes;
-  redirectUri: IOAuthRedirect;
-  api?: IAPIConfig;
-}
-
-type OAuthServiceScopes = "gmail.send.email" | "";
-type OAuthAccountScopes = "profile" | "subscription.read" | "";
-
 export class KOAuth2Client {
-  private api: IAPIConfig = { lang: "pt", version: "v1" };
   private config: IOAuthClientProps = {
     clientId: "",
     clientSecret: "",
     redirectUri: { account: "", service: "" },
     scopes: {
-      account: [""],
-      service: [""],
+      account: [],
+      service: {
+        scopes: [],
+        platform: "",
+      },
     },
     api: {
       lang: "pt",
@@ -54,13 +31,22 @@ export class KOAuth2Client {
     },
   };
 
-  constructor({ api, redirectUri, scopes, ...rest }: IOAuthClientProps) {
+  constructor({
+    api,
+    redirectUri,
+    scopes: { account, service },
+    ...rest
+  }: IOAuthClientProps) {
     this.config = {
       ...this.config,
       ...rest,
       scopes: {
         ...this.config.scopes,
-        ...scopes,
+        ...account,
+        service: {
+          ...this.config.scopes.service,
+          ...service,
+        },
       },
       redirectUri: {
         ...this.config.redirectUri,
@@ -74,7 +60,7 @@ export class KOAuth2Client {
   }
 
   generateOAuthAccountUrl({ state }: { state?: string }) {
-    const url = `https://kumbify.com/${this.api.lang}/oauth?client_id=${
+    const url = `https://kumbify.com/${this.config.api.lang}/oauth?client_id=${
       this.config.clientId
     }&scopes=${this.config.scopes.account.join(",")}${
       state ? `&state=${state}` : ""
@@ -85,12 +71,14 @@ export class KOAuth2Client {
 
   generateOAuthServiceUrl({ state }: { state?: string }) {
     const url = `https://kumbify.com/${
-      this.api.lang
+      this.config.api.lang
     }/oauth/services?client_id=${
       this.config.clientId
-    }&scopes=${this.config.scopes.service.join(",")}${
+    }&scopes=${this.config.scopes.service.scopes.join(",")}${
       state ? `&state=${state}` : ""
-    }&redirect=${this.config.redirectUri.service}`;
+    }&service=${this.config.scopes.service.platform}&redirect=${
+      this.config.redirectUri.service
+    }`;
 
     return { url };
   }
@@ -116,7 +104,7 @@ export class KOAuth2Client {
         },
         headers: {
           "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.api.lang,
+          lang: this.config.api.lang,
         },
       });
 
@@ -136,13 +124,45 @@ export class KOAuth2Client {
         },
         headers: {
           "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.api.lang,
+          lang: this.config.api.lang,
         },
       });
 
       return response;
     } catch (error) {
       APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
+  verifyWebhookEvent(params: IOAuthVerifyWebhookEvents) {
+    try {
+      const signature = params.req.headers["X-Hub-Signature-256"] as string;
+
+      if (!signature) {
+        APIError.CatchError({ error: "Invalid signature", section: "oauth" });
+      }
+
+      const expectedHash = crypto
+        .createHmac("sha256", this.config.clientSecret)
+        .update(JSON.stringify(params.req.rawBody))
+        .digest("hex");
+
+      const checksum = Buffer.from(signature, "utf8");
+      const expectedChecksum = Buffer.from(expectedHash, "utf8");
+
+      if (
+        checksum.length === expectedChecksum.length &&
+        crypto.timingSafeEqual(checksum, expectedChecksum)
+      ) {
+        return true;
+      } else {
+        APIError.CatchError({ error: "Invalid signature", section: "oauth" });
+      }
+    } catch (error) {
+      APIError.CatchError({
+        error: "Error while check signature",
+        section: "oauth",
+      });
     }
   }
 }

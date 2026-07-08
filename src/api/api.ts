@@ -4,7 +4,7 @@ export async function fetchRequest({
   ...data
 }: {
   url: string;
-  method: "post" | "get" | "put" | "delete";
+  method: "post" | "post-form" | "get" | "put" | "delete";
   body?: Record<string, any>;
   params?: Record<string, any>;
   headers?: Record<string, any>;
@@ -31,6 +31,13 @@ export async function fetchRequest({
 
     case "post":
       resp = await axiosAPI.post(data.url, data.body, {
+        headers: data.headers,
+        params: data.params,
+      });
+      break;
+
+    case "post-form":
+      resp = await axiosAPI.postForm(data.url, data.body, {
         headers: data.headers,
         params: data.params,
       });
