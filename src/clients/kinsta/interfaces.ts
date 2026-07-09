@@ -15,6 +15,7 @@ export interface IKInstagramMessageParams {
   };
   message?: {
     text: string;
+    action: "reply-comment" | "message";
   };
   comment?: {
     id: string;

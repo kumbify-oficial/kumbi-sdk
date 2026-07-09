@@ -27,6 +27,7 @@ export interface IKFacebookMessageParams {
   };
   message?: {
     text: string;
+    action: "reply-comment" | "message";
   };
   comment?: {
     id: string;
