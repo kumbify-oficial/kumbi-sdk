@@ -53,6 +53,7 @@ export type OAuthServiceScopes =
   | "facebook-pages.publish"
   | "facebook-pages.comment"
   | "facebook-pages.message"
+  | "facebook-pages.showlist"
   | "whatsapp.message";
 
 export type OAuthAccountScopes = "profile" | "subscription.read" | "";

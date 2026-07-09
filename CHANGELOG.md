@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.5.5
+
+### Patch Changes
+
+- feat: add fb scopes
+
 ## 1.5.4
 
 ### Patch Changes
