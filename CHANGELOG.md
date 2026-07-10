@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.5.6
+
+### Patch Changes
+
+- add idempodency
+
 ## 1.5.5
 
 ### Patch Changes

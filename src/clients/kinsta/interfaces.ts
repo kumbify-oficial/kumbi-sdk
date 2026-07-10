@@ -10,6 +10,7 @@ export interface IKInstagramMessageParams {
   action: "messages" | "comments";
   accountId: string;
   accessToken: string;
+  requestId: string;
   from: {
     id: string;
   };
@@ -25,6 +26,7 @@ export interface IKInstagramMessageParams {
 
 export interface IKInstagramMessageResponse {
   success: boolean;
+  messageId: string;
 }
 
 export interface IKInstagramPublishContentParams {

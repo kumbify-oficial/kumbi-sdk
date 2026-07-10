@@ -2,6 +2,8 @@ import { IAPIConfig } from "../../utils/types";
 
 export interface IKwabaParams {
   apiKey: string;
+  clientId: string;
+  clientSecret: string;
   api?: IAPIConfig;
 }
 
@@ -12,6 +14,7 @@ export interface IKwabaGenerateQRCodeResponse {
 
 export interface IKWabaSendMessageParams {
   to: string;
+  requestId: string;
   media?: {
     type: "video" | "audio" | "document" | "image";
     caption?: string;
@@ -33,4 +36,5 @@ export interface IKWabaSendMessageParams {
 
 export interface IKWabaSendMessageResponse {
   success: boolean;
+  messageId: string;
 }

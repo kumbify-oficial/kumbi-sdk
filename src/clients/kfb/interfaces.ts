@@ -22,6 +22,7 @@ export interface IKFacebookMessageParams {
   action: "messages" | "comments";
   accountId: string;
   accessToken: string;
+  requestId: string;
   from: {
     id: string;
   };
@@ -37,6 +38,7 @@ export interface IKFacebookMessageParams {
 
 export interface IKFacebookMessageResponse {
   success: boolean;
+  messageId: string;
 }
 
 export interface IKFacebookPublishContentParams {

@@ -38,6 +38,7 @@ export class KInstagramClient {
           fromId: params.from.id,
           message: params.message,
           comment: params.comment,
+          requestId: params.requestId,
         },
         headers: {
           Authorization: `Bearer ${params.accessToken}`,

@@ -63,6 +63,7 @@ export class KFacebookClient {
           comment: params.comment,
           clientId: this.config.clientId,
           clientSecret: this.config.clientSecret,
+          requestId: params.requestId,
         },
         headers: {
           Authorization: `Bearer ${params.accessToken}`,
