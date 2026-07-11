@@ -71,3 +71,15 @@ export type IOAuthUserInfoResponse = {
     kumbi_code: string;
   };
 };
+
+export type IOAuthServiceInfoResponse = {
+  success: boolean;
+  service: {
+    name: string;
+    platform: string;
+    integration: {
+      code: string;
+      name: string;
+    };
+  };
+};

@@ -1,6 +1,7 @@
 import { APP_CONFIG } from "../../utils/helpers";
 import { fetchRequest } from "../../api/api";
 import {
+  IOAuthServiceInfoResponse,
   IOAuthUserInfoResponse,
   IOAuthUserTokenReponse,
 } from "../../utils/types";
@@ -114,6 +115,26 @@ export class KOAuth2Client {
     try {
       const response: IOAuthUserInfoResponse = await fetchRequest({
         url: APP_CONFIG.OAUTH.API_BASE_URL + "/u/me",
+        method: "post",
+        body: {
+          token: accessToken,
+        },
+        headers: {
+          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
+          lang: this.config.api.lang,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
+  async serviceInfo({ accessToken }: { accessToken: string }) {
+    try {
+      const response: IOAuthServiceInfoResponse = await fetchRequest({
+        url: APP_CONFIG.OAUTH.API_BASE_URL + "/u/integrations/services/me",
         method: "post",
         body: {
           token: accessToken,

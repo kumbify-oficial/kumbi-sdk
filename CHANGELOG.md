@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.5.11
+
+### Patch Changes
+
+- update koauth add serviceInfo
+
 ## 1.5.10
 
 ### Patch Changes
