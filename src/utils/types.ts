@@ -60,6 +60,10 @@ export type IOAuthUserTokenReponse = {
   refresh_token: string;
 };
 
+export type IOAuthRevokeTokenReponse = {
+  success: boolean;
+};
+
 export type IOAuthUserInfoResponse = {
   success: boolean;
   user: {

@@ -1,6 +1,7 @@
 import { APP_CONFIG } from "../../utils/helpers";
 import { fetchRequest } from "../../api/api";
 import {
+  IOAuthRevokeTokenReponse,
   IOAuthServiceInfoResponse,
   IOAuthUserInfoResponse,
   IOAuthUserTokenReponse,
@@ -151,6 +152,39 @@ export class KOAuth2Client {
     }
   }
 
+  async revokeAccessToken({
+    accessToken,
+    type,
+  }: {
+    accessToken: string;
+    type: "service" | "account";
+  }) {
+    try {
+      const url = type == "service" ? "integrations" : "me";
+
+      const response: IOAuthRevokeTokenReponse = await fetchRequest({
+        url: APP_CONFIG.OAUTH.API_BASE_URL + `/u/${url}/revoke`,
+        method: "post",
+        body: {
+          token: accessToken,
+        },
+        headers: {
+          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
+          lang: this.config.api.lang,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
+  /**
+   * @ WEBHOOK EVENTS
+   * Verifies the webhook when the payload sent to the event URLs arrives.
+   *
+   */
   verifyWebhookEvent(params: IOAuthVerifyWebhookEvents) {
     try {
       const signature = params.req.headers["X-Hub-Signature-256"] as string;

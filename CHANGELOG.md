@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.5.12
+
+### Patch Changes
+
+- add revokeAcessToken to oauth client
+
 ## 1.5.11
 
 ### Patch Changes
