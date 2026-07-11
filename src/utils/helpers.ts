@@ -4,8 +4,8 @@ export const APP_CONFIG = {
   KSMS_URL: "https://oi.kumbify.com/api/sms",
   KMAIL_URL: "https://oi.kumbify.com/api/email",
   KWABA_URL: "https://wa.kumbify.com/api",
-  KFB_URL: "https://oi.kumbify.com/api/social/facebook",
-  KINSTA_URL: "https://oi.kumbify.com/api/social/instagram",
+  KFB_URL: "https://oi.kumbify.com/api/meta/social/facebook",
+  KINSTA_URL: "https://oi.kumbify.com/api/meta/social/instagram",
   OAUTH: {
     API_BASE_URL: "https://8n8.kumbify.com/api",
   },
