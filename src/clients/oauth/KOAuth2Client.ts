@@ -32,9 +32,9 @@ export class KOAuth2Client {
   };
 
   constructor({
-    api,
+    api = {},
     redirectUri,
-    scopes: { account, service },
+    scopes: { account = [], service = { platform: "", scopes: [] } } = {},
     ...rest
   }: IOAuthClientProps) {
     this.config = {
@@ -42,16 +42,13 @@ export class KOAuth2Client {
       ...rest,
       scopes: {
         ...this.config.scopes,
-        ...account,
+        account: [...(this.config.scopes?.account ?? []), ...account],
         service: {
-          ...this.config.scopes.service,
+          ...this.config.scopes?.service,
           ...service,
         },
       },
-      redirectUri: {
-        ...this.config.redirectUri,
-        ...redirectUri,
-      },
+      redirectUri: redirectUri ?? this.config.redirectUri,
       api: {
         ...this.config.api,
         ...api,

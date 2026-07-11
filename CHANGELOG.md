@@ -1,5 +1,23 @@
 # kumbi-sdk
 
+## 1.5.9
+
+### Patch Changes
+
+- fix-bug: koauth
+
+## 1.5.8
+
+### Patch Changes
+
+- update koauth constructor
+
+## 1.5.7
+
+### Patch Changes
+
+- update koaut client
+
 ## 1.5.6
 
 ### Patch Changes
