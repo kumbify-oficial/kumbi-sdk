@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.5.10
+
+### Patch Changes
+
+- update koauth generate token
+
 ## 1.5.9
 
 ### Patch Changes

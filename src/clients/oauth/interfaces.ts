@@ -5,7 +5,6 @@ export interface IOAuthClientTokenParams {
   code: string;
   grant_type: "authorization_code" | "refresh_token";
   refresh_token?: string;
-  redirect?: IOAuthRedirect;
   expires_in: "1h" | "1d" | "7d" | "never";
 }
 

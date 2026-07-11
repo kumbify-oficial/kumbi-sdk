@@ -82,11 +82,10 @@ export class KOAuth2Client {
 
   async generateToken({ ...data }: IOAuthClientTokenParams) {
     try {
-      const redirectUri = data.redirect
-        ? data.type == "account"
-          ? data.redirect.account
-          : data.redirect.service
-        : "";
+      const redirectUri =
+        data.type == "account"
+          ? this.config.redirectUri.account
+          : this.config.redirectUri.service;
 
       const response: IOAuthUserTokenReponse = await fetchRequest({
         url: APP_CONFIG.OAUTH.API_BASE_URL + "/u/tokens/generate",
