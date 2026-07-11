@@ -1,5 +1,23 @@
 # kumbi-sdk
 
+## 1.6.0
+
+### Minor Changes
+
+- fix-bug auth headers
+
+## 1.5.14
+
+### Patch Changes
+
+- fix-bug kwaba generate qrcode
+
+## 1.5.13
+
+### Patch Changes
+
+- add waba qrcode to genere by app
+
 ## 1.5.12
 
 ### Patch Changes

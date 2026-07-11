@@ -28,6 +28,16 @@ export class KInstagramClient {
     };
   }
 
+  private getAuthHeaders({ accessToken }: { accessToken: string }) {
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      "kumbi-app-id": this.config.clientId,
+      "kumbi-app-secret": this.config.clientSecret,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async sendMessage(params: IKInstagramMessageParams) {
     try {
       const response: IKInstagramMessageResponse = await fetchRequest({
@@ -41,7 +51,7 @@ export class KInstagramClient {
           requestId: params.requestId,
         },
         headers: {
-          Authorization: `Bearer ${params.accessToken}`,
+          ...this.getAuthHeaders({ accessToken: params.accessToken }),
         },
       });
 
@@ -54,9 +64,6 @@ export class KInstagramClient {
   async publishContent(params: IKInstagramPublishContentParams) {
     try {
       const formData = new FormData();
-
-      formData.append("clientId", this.config.clientId);
-      formData.append("clientSecret", this.config.clientSecret);
       formData.append("caption", params.media.caption);
 
       if (params.media.fileBuffer) {
@@ -74,7 +81,7 @@ export class KInstagramClient {
         method: "post-form",
         body: formData,
         headers: {
-          Authorization: `Bearer ${params.accessToken}`,
+          ...this.getAuthHeaders({ accessToken: params.accessToken }),
         },
       });
 

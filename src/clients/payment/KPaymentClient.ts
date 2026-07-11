@@ -32,6 +32,14 @@ export class KPaymentClient {
     };
   }
 
+  private getAuthHeaders() {
+    const headers = {
+      "kumbi-api-key": "Bearer " + this.config.apiKey,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async makeStripePayment({ ...data }: IMakeStripePaymentParams) {
     try {
       const response: IMakeStripePaymentResponse = await fetchRequest({
@@ -39,8 +47,7 @@ export class KPaymentClient {
         method: "post",
         body: data,
         headers: {
-          "kumbi-api-key": `Bearer ${this.config.apiKey}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -57,8 +64,7 @@ export class KPaymentClient {
         method: "post",
         body: data,
         headers: {
-          "kumbi-api-key": `Bearer ${this.config.apiKey}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -78,8 +84,7 @@ export class KPaymentClient {
           ...data,
         },
         headers: {
-          "kumbi-api-key": `Bearer ${this.config.apiKey}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 

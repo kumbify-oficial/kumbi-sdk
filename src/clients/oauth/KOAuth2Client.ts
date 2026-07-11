@@ -58,6 +58,14 @@ export class KOAuth2Client {
     };
   }
 
+  private getAuthHeaders() {
+    const headers = {
+      "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   generateOAuthAccountUrl({ state }: { state?: string }) {
     const url = `https://kumbify.com/${this.config.api.lang}/oauth?client_id=${
       this.config.clientId
@@ -101,8 +109,7 @@ export class KOAuth2Client {
           expires_in: data.expires_in,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -121,8 +128,7 @@ export class KOAuth2Client {
           token: accessToken,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -141,8 +147,7 @@ export class KOAuth2Client {
           token: accessToken,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -169,8 +174,7 @@ export class KOAuth2Client {
           token: accessToken,
         },
         headers: {
-          "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 

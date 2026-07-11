@@ -29,13 +29,23 @@ export class KWabaClient {
     };
   }
 
+  private getAuthHeaders() {
+    const headers = {
+      "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+      "kumbi-app-id": this.config.clientId,
+      "kumbi-app-key": this.config.clientSecret,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async generateQRCode() {
     try {
       const response: IKwabaGenerateQRCodeResponse = await fetchRequest({
-        url: `${APP_CONFIG.KWABA_URL}/waba/qrcode`,
+        url: `${APP_CONFIG.KWABA_URL}/app/waba/qrcode`,
         method: "get",
         headers: {
-          "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -57,12 +67,10 @@ export class KWabaClient {
             to: params.to,
             message: params?.text?.content,
             session: params.direct.sessionId,
-            clientSecret: this.config.clientSecret,
-            clientId: this.config.clientId,
             requestId: params.requestId,
           },
           headers: {
-            "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+            ...this.getAuthHeaders(),
           },
         });
       }
@@ -74,8 +82,6 @@ export class KWabaClient {
         formData.append("session", params.direct.sessionId);
         formData.append("caption", params.media.caption);
         formData.append("requestId", params.requestId);
-        formData.append("clientId", this.config.clientId);
-        formData.append("clientSecret", this.config.clientSecret);
 
         if (params.media.fileBuffer) {
           const fileType = await detectFileType(params.media.fileBuffer);
@@ -91,7 +97,7 @@ export class KWabaClient {
           method: "post-form",
           body: formData,
           headers: {
-            "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+            ...this.getAuthHeaders(),
             ...formData.getHeaders(),
           },
         });
@@ -120,7 +126,7 @@ export class KWabaClient {
             requestId: params.requestId,
           },
           headers: {
-            "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+            ...this.getAuthHeaders(),
           },
         });
       }
@@ -134,12 +140,10 @@ export class KWabaClient {
             message: params?.text?.content,
             template_name: params.official.templateName,
             type: params.official.type,
-            clientSecret: this.config.clientSecret,
-            clientId: this.config.clientId,
             requestId: params.requestId,
           },
           headers: {
-            "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+            ...this.getAuthHeaders(),
           },
         });
       }
@@ -149,8 +153,6 @@ export class KWabaClient {
         formData.append("to", params.to);
         formData.append("type", params.media.type);
         formData.append("requestId", params.requestId);
-        formData.append("clientId", this.config.clientId);
-        formData.append("clientSecret", this.config.clientSecret);
 
         if (params.media.fileBuffer) {
           const fileType = await detectFileType(params.media.fileBuffer);
@@ -166,7 +168,7 @@ export class KWabaClient {
           method: "post-form",
           body: formData,
           headers: {
-            "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+            ...this.getAuthHeaders(),
           },
         });
       }

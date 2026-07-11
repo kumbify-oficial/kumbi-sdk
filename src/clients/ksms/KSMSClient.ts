@@ -33,6 +33,14 @@ export class KSMSClient {
     };
   }
 
+  private getAuthHeaders() {
+    const headers = {
+      "kumbi-api-key": "Bearer " + this.config.apiKey,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async sendSMS({ ...data }: IKSMSSendMessage) {
     try {
       const response: IKSMSResponseMessage = await fetchRequest({
@@ -44,8 +52,7 @@ export class KSMSClient {
           from: data.from,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.config.apiKey,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 

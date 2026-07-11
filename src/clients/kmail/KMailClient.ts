@@ -34,6 +34,14 @@ export class KMailClient {
     };
   }
 
+  private getAuthHeaders() {
+    const headers = {
+      "kumbi-api-key": "Bearer " + this.config.apiKey,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async sendSimpleMail({ ...data }: IKMailSendMailSimpleMessage) {
     try {
       const response: IKMailResponseMail = await fetchRequest({
@@ -47,8 +55,7 @@ export class KMailClient {
           body_text: data.body.text,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.config.apiKey,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 
@@ -70,8 +77,7 @@ export class KMailClient {
           template_data: data.template.data,
         },
         headers: {
-          "kumbi-api-key": "Bearer " + this.config.apiKey,
-          lang: this.config.api.lang,
+          ...this.getAuthHeaders(),
         },
       });
 

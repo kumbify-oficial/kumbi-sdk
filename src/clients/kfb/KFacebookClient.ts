@@ -30,17 +30,23 @@ export class KFacebookClient {
     };
   }
 
+  private getAuthHeaders({ accessToken }: { accessToken: string }) {
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      "kumbi-app-id": this.config.clientId,
+      "kumbi-app-secret": this.config.clientSecret,
+      lang: this.config.api.lang,
+    };
+    return headers;
+  }
+
   async listPages(params: IFacebookShowListPageParams) {
     try {
       const response: IKFacebookShowListResponse = await fetchRequest({
         url: `${APP_CONFIG.KFB_URL}/pages`,
-        method: "post",
-        body: {
-          clientId: this.config.clientId,
-          clientSecret: this.config.clientSecret,
-        },
+        method: "get",
         headers: {
-          Authorization: `Bearer ${params.accessToken}`,
+          ...this.getAuthHeaders({ accessToken: params.accessToken }),
         },
       });
 
@@ -61,12 +67,10 @@ export class KFacebookClient {
           accountId: params.accountId,
           message: params.message,
           comment: params.comment,
-          clientId: this.config.clientId,
-          clientSecret: this.config.clientSecret,
           requestId: params.requestId,
         },
         headers: {
-          Authorization: `Bearer ${params.accessToken}`,
+          ...this.getAuthHeaders({ accessToken: params.accessToken }),
         },
       });
 
@@ -87,19 +91,15 @@ export class KFacebookClient {
           body: {
             accountId: params.accountId,
             description: params.text.content,
-            clientId: this.config.clientId,
-            clientSecret: this.config.clientSecret,
           },
           headers: {
-            Authorization: `Bearer ${params.accessToken}`,
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }
 
       if (params.type == "media") {
         const formData = new FormData();
-        formData.append("clientId", this.config.clientId);
-        formData.append("clientSecret", this.config.clientSecret);
 
         if (params.media.fileBuffer) {
           const fileType = await detectFileType(params.media.fileBuffer);
@@ -116,7 +116,7 @@ export class KFacebookClient {
           method: "post-form",
           body: formData,
           headers: {
-            Authorization: `Bearer ${params.accessToken}`,
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }
