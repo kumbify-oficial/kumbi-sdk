@@ -84,6 +84,7 @@ export type IOAuthServiceInfoResponse = {
     integration: {
       code: string;
       name: string;
+      phone?: string;
     };
   };
 };
