@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.6.2
+
+### Patch Changes
+
+- return integration info
+
 ## 1.6.1
 
 ### Patch Changes
