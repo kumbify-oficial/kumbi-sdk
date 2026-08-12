@@ -12,6 +12,9 @@ export const APP_CONFIG = {
   PAYMENT: {
     API_BASE_URL: "https://oi.kumbify.com/api/pay",
   },
+  PROFILE: {
+    BASE_URL: "https://oi.kumbify.com/api/profiles",
+  },
 };
 
 export async function streamToBufferTradicional(stream: any) {

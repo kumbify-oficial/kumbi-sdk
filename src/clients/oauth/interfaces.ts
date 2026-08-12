@@ -1,5 +1,20 @@
 import { IAPIConfig } from "../../utils/types";
 
+// PROFILE
+
+export interface IProfileCreateParams {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface IProfileCreateResponse {
+  code: string;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface IOAuthClientTokenParams {
   type: "services" | "account";
   code: string;

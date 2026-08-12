@@ -6,12 +6,14 @@ import {
   IOAuthUserInfoResponse,
   IOAuthUserTokenReponse,
 } from "../../utils/types";
+import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 import {
   IOAuthClientProps,
   IOAuthClientTokenParams,
   IOAuthVerifyWebhookEvents,
+  IProfileCreateParams,
+  IProfileCreateResponse,
 } from "./interfaces";
-import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 
 import crypto from "crypto";
 import APIError from "../../errors/APIError";
@@ -120,6 +122,33 @@ export class KOAuth2Client {
     }
   }
 
+  async revokeAccessToken({
+    accessToken,
+    type,
+  }: {
+    accessToken: string;
+    type: "service" | "account";
+  }) {
+    try {
+      const url = type == "service" ? "integrations" : "me";
+
+      const response: IOAuthRevokeTokenReponse = await fetchRequest({
+        url: APP_CONFIG.OAUTH.API_BASE_URL + `/u/${url}/revoke`,
+        method: "post",
+        body: {
+          token: accessToken,
+        },
+        headers: {
+          ...this.getAuthHeaders(),
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
   async userInfo({ accessToken }: { accessToken: string }) {
     try {
       const response: IOAuthUserInfoResponse = await fetchRequest({
@@ -158,23 +187,17 @@ export class KOAuth2Client {
     }
   }
 
-  async revokeAccessToken({
-    accessToken,
-    type,
-  }: {
-    accessToken: string;
-    type: "service" | "account";
-  }) {
+  async createProfile(params: IProfileCreateParams) {
     try {
-      const url = type == "service" ? "integrations" : "me";
-
-      const response: IOAuthRevokeTokenReponse = await fetchRequest({
-        url: APP_CONFIG.OAUTH.API_BASE_URL + `/u/${url}/revoke`,
+      const response: IProfileCreateResponse = await fetchRequest({
+        url: APP_CONFIG.PROFILE.BASE_URL + `/create`,
         method: "post",
         body: {
-          token: accessToken,
+          ...params,
         },
         headers: {
+          [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,
+          [EKUMBI_APP_HEADERS.APP_ID]: this.config.clientId,
           ...this.getAuthHeaders(),
         },
       });
