@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.6.6
+
+### Patch Changes
+
+- update kwaba auth
+
 ## 1.6.5
 
 ### Patch Changes

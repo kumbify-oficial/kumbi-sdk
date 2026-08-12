@@ -12,6 +12,7 @@ export interface IKwabaGenerateQRCodeResponse {
 }
 
 export interface IKWabaSendMessageParams {
+  // Oficial waba token or waba direct session
   accessToken: string;
   to: string;
   requestId: string;

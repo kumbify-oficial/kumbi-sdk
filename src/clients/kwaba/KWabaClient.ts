@@ -30,7 +30,7 @@ export class KWabaClient {
 
   private getAuthHeaders({ accessToken }: { accessToken?: string }) {
     const headers = {
-      ...(accessToken && { authorization: `Berear ${accessToken}` }),
+      ...(accessToken && { authorization: `Bearer ${accessToken}` }),
       [EKUMBI_APP_HEADERS.APP_ID]: this.config.clientId,
       [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,
       lang: this.config.api.lang,
