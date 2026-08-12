@@ -13,7 +13,6 @@ import APIError from "../../errors/APIError";
 
 export class KWabaClient {
   private config: IKwabaParams = {
-    apiKey: "",
     clientId: "",
     clientSecret: "",
     api: {
@@ -29,9 +28,9 @@ export class KWabaClient {
     };
   }
 
-  private getAuthHeaders() {
+  private getAuthHeaders({ accessToken }: { accessToken?: string }) {
     const headers = {
-      "kumbi-api-key": `Bearer ${this.config.apiKey}`,
+      ...(accessToken && { authorization: `Berear ${accessToken}` }),
       "kumbi-app-id": this.config.clientId,
       "kumbi-app-key": this.config.clientSecret,
       lang: this.config.api.lang,
@@ -45,7 +44,7 @@ export class KWabaClient {
         url: `${APP_CONFIG.KWABA_URL}/app/waba/qrcode`,
         method: "get",
         headers: {
-          ...this.getAuthHeaders(),
+          ...this.getAuthHeaders({}),
         },
       });
 
@@ -70,7 +69,7 @@ export class KWabaClient {
             requestId: params.requestId,
           },
           headers: {
-            ...this.getAuthHeaders(),
+            ...this.getAuthHeaders({}),
           },
         });
       }
@@ -97,7 +96,7 @@ export class KWabaClient {
           method: "post-form",
           body: formData,
           headers: {
-            ...this.getAuthHeaders(),
+            ...this.getAuthHeaders({}),
             ...formData.getHeaders(),
           },
         });
@@ -126,7 +125,7 @@ export class KWabaClient {
             requestId: params.requestId,
           },
           headers: {
-            ...this.getAuthHeaders(),
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }
@@ -143,7 +142,7 @@ export class KWabaClient {
             requestId: params.requestId,
           },
           headers: {
-            ...this.getAuthHeaders(),
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }
@@ -168,7 +167,7 @@ export class KWabaClient {
           method: "post-form",
           body: formData,
           headers: {
-            ...this.getAuthHeaders(),
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }

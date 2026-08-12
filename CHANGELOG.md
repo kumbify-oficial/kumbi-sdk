@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.6.3
+
+### Patch Changes
+
+- update kwaba client apikey to accessToke
+
 ## 1.6.2
 
 ### Patch Changes
