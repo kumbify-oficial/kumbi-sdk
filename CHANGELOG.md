@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.6.5
+
+### Patch Changes
+
+- update waba retrieve
+
 ## 1.6.4
 
 ### Patch Changes

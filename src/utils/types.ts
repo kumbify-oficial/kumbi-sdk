@@ -84,7 +84,10 @@ export type IOAuthServiceInfoResponse = {
     integration: {
       code: string;
       name: string;
-      phone?: string;
+      waba?: {
+        phone_id?: string;
+        phone_number?: string;
+      };
     };
   };
 };
