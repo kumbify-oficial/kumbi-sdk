@@ -1,6 +1,6 @@
 import { fetchRequest } from "../../api/api";
 import { APP_CONFIG, detectFileType } from "../../utils/helpers";
-
+import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 import {
   IKwabaGenerateQRCodeResponse,
   IKwabaParams,
@@ -31,8 +31,8 @@ export class KWabaClient {
   private getAuthHeaders({ accessToken }: { accessToken?: string }) {
     const headers = {
       ...(accessToken && { authorization: `Berear ${accessToken}` }),
-      "kumbi-app-id": this.config.clientId,
-      "kumbi-app-key": this.config.clientSecret,
+      [EKUMBI_APP_HEADERS.APP_ID]: this.config.clientId,
+      [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,
       lang: this.config.api.lang,
     };
     return headers;

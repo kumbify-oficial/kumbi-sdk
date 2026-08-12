@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.6.4
+
+### Patch Changes
+
+- refactor auth clients
+
 ## 1.6.3
 
 ### Patch Changes

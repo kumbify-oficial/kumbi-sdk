@@ -7,6 +7,7 @@ import {
   IKInstagramPublishContentParams,
   IKInstagramPublishContentResponse,
 } from "./interfaces";
+import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 
 import FormData from "form-data";
 import APIError from "../../errors/APIError";
@@ -31,8 +32,8 @@ export class KInstagramClient {
   private getAuthHeaders({ accessToken }: { accessToken: string }) {
     const headers = {
       Authorization: `Bearer ${accessToken}`,
-      "kumbi-app-id": this.config.clientId,
-      "kumbi-app-secret": this.config.clientSecret,
+      [EKUMBI_APP_HEADERS.APP_ID]: this.config.clientId,
+      [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,
       lang: this.config.api.lang,
     };
     return headers;

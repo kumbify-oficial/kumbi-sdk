@@ -11,8 +11,9 @@ import {
   IOAuthClientTokenParams,
   IOAuthVerifyWebhookEvents,
 } from "./interfaces";
-import crypto from "crypto";
+import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 
+import crypto from "crypto";
 import APIError from "../../errors/APIError";
 
 export class KOAuth2Client {
@@ -60,7 +61,7 @@ export class KOAuth2Client {
 
   private getAuthHeaders() {
     const headers = {
-      "kumbi-app-key": `Bearer ${this.config.clientSecret}`,
+      [EKUMBI_APP_HEADERS.RAW_APP_KEY]: `Bearer ${this.config.clientSecret}`,
       lang: this.config.api.lang,
     };
     return headers;

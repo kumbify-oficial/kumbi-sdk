@@ -5,6 +5,7 @@ import {
   IKSMSSendMessage,
 } from "../../utils/types";
 import { fetchRequest } from "../../api/api";
+import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 
 import APIError from "../../errors/APIError";
 
@@ -35,7 +36,7 @@ export class KSMSClient {
 
   private getAuthHeaders() {
     const headers = {
-      "kumbi-api-key": "Bearer " + this.config.apiKey,
+      [EKUMBI_APP_HEADERS.RAW_API_KEY]: "Bearer " + this.config.apiKey,
       lang: this.config.api.lang,
     };
     return headers;
