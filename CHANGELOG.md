@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.1
+
+### Patch Changes
+
+- update oauth client profile api
+
 ## 1.7.0
 
 ### Minor Changes

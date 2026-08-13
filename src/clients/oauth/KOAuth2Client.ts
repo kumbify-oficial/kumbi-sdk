@@ -11,6 +11,8 @@ import {
   IOAuthClientProps,
   IOAuthClientTokenParams,
   IOAuthVerifyWebhookEvents,
+  IProfileConfirmationParams,
+  IProfileConfirmationResponse,
   IProfileCreateParams,
   IProfileCreateResponse,
 } from "./interfaces";
@@ -187,13 +189,35 @@ export class KOAuth2Client {
     }
   }
 
-  async createProfile(params: IProfileCreateParams) {
+  async profileCreation(params: IProfileCreateParams) {
     try {
       const response: IProfileCreateResponse = await fetchRequest({
         url: APP_CONFIG.PROFILE.BASE_URL + `/create`,
         method: "post",
         body: {
           ...params,
+        },
+        headers: {
+          [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,
+          [EKUMBI_APP_HEADERS.APP_ID]: this.config.clientId,
+          ...this.getAuthHeaders(),
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
+  async profileConfirmation(params: IProfileConfirmationParams) {
+    try {
+      const response: IProfileConfirmationResponse = await fetchRequest({
+        url: APP_CONFIG.PROFILE.BASE_URL + `/confirm-account`,
+        method: "post",
+        body: {
+          token: params.accessToken,
+          code: params.code,
         },
         headers: {
           [EKUMBI_APP_HEADERS.APP_SECRET]: this.config.clientSecret,

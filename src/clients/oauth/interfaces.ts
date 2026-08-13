@@ -15,6 +15,15 @@ export interface IProfileCreateResponse {
   refreshToken: string;
 }
 
+export interface IProfileConfirmationParams {
+  accessToken: string;
+  code: string;
+}
+
+export interface IProfileConfirmationResponse {
+  success: boolean;
+}
+
 export interface IOAuthClientTokenParams {
   type: "services" | "account";
   code: string;
