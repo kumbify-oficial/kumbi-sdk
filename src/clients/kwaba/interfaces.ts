@@ -11,6 +11,15 @@ export interface IKwabaGenerateQRCodeResponse {
   qrcode: string;
 }
 
+export interface IKWabaQRCodeLogoutSessionParams {
+  accessToken: string;
+  session: string;
+}
+
+export interface IKWabaQRCodeLogoutSessionResponse {
+  success: boolean;
+}
+
 export interface IKWabaSendMessageParams {
   // Oficial waba token or waba direct session
   accessToken: string;

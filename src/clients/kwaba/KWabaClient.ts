@@ -4,6 +4,8 @@ import { EKUMBI_APP_HEADERS } from "../../utils/enums";
 import {
   IKwabaGenerateQRCodeResponse,
   IKwabaParams,
+  IKWabaQRCodeLogoutSessionParams,
+  IKWabaQRCodeLogoutSessionResponse,
   IKWabaSendMessageParams,
   IKWabaSendMessageResponse,
 } from "./interfaces";
@@ -45,6 +47,25 @@ export class KWabaClient {
         method: "get",
         headers: {
           ...this.getAuthHeaders({}),
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error: error, section: "kwaba" });
+    }
+  }
+
+  async logoutQRCodeSession(params: IKWabaQRCodeLogoutSessionParams) {
+    try {
+      const response: IKWabaQRCodeLogoutSessionResponse = await fetchRequest({
+        url: `${APP_CONFIG.KWABA_URL}/app/waba/sessions/logout`,
+        method: "post",
+        body: {
+          session: params.session,
+        },
+        headers: {
+          ...this.getAuthHeaders({ accessToken: params.accessToken }),
         },
       });
 

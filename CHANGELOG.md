@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.2
+
+### Patch Changes
+
+- add waba logout qrcode session
+
 ## 1.7.1
 
 ### Patch Changes
