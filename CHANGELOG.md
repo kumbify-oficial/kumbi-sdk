@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.5
+
+### Patch Changes
+
+- fix workflow publish
+
 ## 1.7.4
 
 ### Patch Changes
