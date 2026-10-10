@@ -4,6 +4,7 @@ import {
   IOAuthRevokeTokenReponse,
   IOAuthServiceInfoResponse,
   IOAuthUserInfoResponse,
+  IOAuthUserSubscriptionResponse,
   IOAuthUserTokenReponse,
 } from "../../utils/types";
 import { EKUMBI_APP_HEADERS } from "../../utils/enums";
@@ -155,6 +156,25 @@ export class KOAuth2Client {
     try {
       const response: IOAuthUserInfoResponse = await fetchRequest({
         url: APP_CONFIG.OAUTH.API_BASE_URL + "/u/me",
+        method: "post",
+        body: {
+          token: accessToken,
+        },
+        headers: {
+          ...this.getAuthHeaders(),
+        },
+      });
+
+      return response;
+    } catch (error) {
+      APIError.CatchError({ error, section: "oauth" });
+    }
+  }
+
+  async userSubscription({ accessToken }: { accessToken: string }) {
+    try {
+      const response: IOAuthUserSubscriptionResponse = await fetchRequest({
+        url: APP_CONFIG.OAUTH.API_BASE_URL + "/u/me/subscription",
         method: "post",
         body: {
           token: accessToken,

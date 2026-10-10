@@ -90,7 +90,7 @@ export class KWabaClient {
             requestId: params.requestId,
           },
           headers: {
-            ...this.getAuthHeaders({}),
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
           },
         });
       }
@@ -117,7 +117,7 @@ export class KWabaClient {
           method: "post-form",
           body: formData,
           headers: {
-            ...this.getAuthHeaders({}),
+            ...this.getAuthHeaders({ accessToken: params.accessToken }),
             ...formData.getHeaders(),
           },
         });

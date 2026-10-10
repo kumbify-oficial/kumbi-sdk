@@ -76,6 +76,48 @@ export type IOAuthUserInfoResponse = {
   };
 };
 
+export type IOAuthUserSubscriptionResponse = {
+  currency: "AOA" | "USD" | string;
+  amount: number;
+  is_expired: boolean;
+  expires_at: string;
+  plan: {
+    name: string;
+  };
+  one: {
+    crm: {
+      atendabots: number;
+      atendatools: number;
+      channels: number;
+      inboxes: number;
+      messages: number;
+      members: number;
+      storage: number;
+    };
+    forms: {
+      branding: number;
+      responses: number;
+      storage: number;
+      upload: number;
+      forms: number;
+    };
+    sonet: {
+      branding: boolean;
+      upload: boolean;
+      metrics: boolean;
+      links: number;
+      mediakit: boolean;
+      storage: number;
+    };
+  };
+  features: {
+    automations: number;
+    integrations: number;
+    automations_used: number;
+    integrations_used: number;
+  };
+};
+
 export type IOAuthServiceInfoResponse = {
   success: boolean;
   service: {
