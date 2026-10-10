@@ -1,33 +1,49 @@
-# Kumbify Oficial SDK Workflow publish
+# Publishes Kumbify SDK to npmjs.org via Trusted Publishing (OIDC)
+# Runs with main verification
 
 name: "Kumbify SDK"
 
 on:
   push:
-    tags:
-      - "v*"
-  workflow_dispatch: # botão para correr manualmente no GitHub
+    branches: [main]
+  workflow_dispatch: # manual run button as a fallback
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # required for OIDC authentication
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 24 # ships with npm 11 (required for trusted publishing)
           registry-url: https://registry.npmjs.org/
 
-      - name: Installing dependecies
+      - name: Check if version already exists on npm
+        id: check
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "⏭️ $NAME@$VERSION already published, skipping."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "🚀 New version: $NAME@$VERSION"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.check.outputs.publish == 'true'
         run: npm ci
 
       - name: Build
+        if: steps.check.outputs.publish == 'true'
         run: npm run build
 
-      - name: Publishing
-        run: npm publish --access public --provenance
+      - name: Publish
+        if: steps.check.outputs.publish == 'true'
+        run: npm publish --access public --provenance # provenance links the release to this repo

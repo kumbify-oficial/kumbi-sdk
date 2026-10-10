@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.6
+
+### Patch Changes
+
+- update clients
+
 ## 1.7.5
 
 ### Patch Changes
