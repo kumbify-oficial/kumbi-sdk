@@ -1,4 +1,4 @@
-# Kumbify SDK Publish Workflow
+# Kumbify Oficial SDK Workflow publish
 
 name: "Kumbify SDK"
 
@@ -13,22 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
 
-      - name: Installating dependencies
+      - name: Installing dependecies
         run: npm ci
 
       - name: Build
         run: npm run build
 
       - name: Publishing
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish --access public --provenance
