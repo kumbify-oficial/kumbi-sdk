@@ -71,7 +71,6 @@ export interface IMakeStripePaymentResponse {
 /**
  * Crypto types
  */
-
 type CryptoCurrencies = "USDC" | "ETH" | "BTC" | "USDT";
 export interface IMakeCryptoPaymentParams {
   transactionId: string;
