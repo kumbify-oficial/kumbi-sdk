@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.7
+
+### Patch Changes
+
+- update fbclient
+
 ## 1.7.6
 
 ### Patch Changes

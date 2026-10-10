@@ -33,6 +33,7 @@ export interface IKFacebookMessageParams {
   comment?: {
     id: string;
     text: string;
+    action: "reply-comment" | "message";
   };
 }
 
