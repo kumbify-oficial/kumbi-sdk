@@ -97,7 +97,7 @@ export type IOAuthUserSubscriptionResponse = {
         storage: number;
       };
       forms: {
-        branding: number;
+        branding: boolean;
         responses: number;
         storage: number;
         upload: number;

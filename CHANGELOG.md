@@ -1,5 +1,11 @@
 # kumbi-sdk
 
+## 1.7.9
+
+### Patch Changes
+
+- update user subscription info
+
 ## 1.7.8
 
 ### Patch Changes
